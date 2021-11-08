@@ -1,8 +1,9 @@
 package com.esiee.openclassroom.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
     private final String mQuestion;
     private final List<String> mChoiceList;
     private final int mAnswerIndex;

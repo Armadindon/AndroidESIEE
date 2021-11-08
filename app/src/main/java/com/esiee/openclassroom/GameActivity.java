@@ -22,7 +22,9 @@ import java.util.Arrays;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
+    private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
+
 
     private QuestionBank mQuestionBank;
     private Question mCurrentQuestion;
@@ -52,18 +54,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswer3.setOnClickListener(this);
         mAnswer4.setOnClickListener(this);
 
-        mQuestionBank = generateQuestionBank();
 
         if (savedInstanceState != null) {
             mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
-            mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_QUESTION);
+            mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_REMAINING_QUESTION);
+            mQuestionBank = (QuestionBank) savedInstanceState.getSerializable(BUNDLE_STATE_QUESTION);
+            mCurrentQuestion = mQuestionBank.getCurrentQuestion();
         } else {
             mScore = 0;
             mRemainingQuestionCount = 4;
+            mQuestionBank = generateQuestionBank();
+            mCurrentQuestion = mQuestionBank.getNextQuestion();
         }
-
-
-        mCurrentQuestion = mQuestionBank.getNextQuestion();
+        System.out.println(mQuestionBank);
         displayQuestion(mCurrentQuestion);
         freezeScreen = false;
     }
@@ -206,7 +209,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onSaveInstanceState(outState);
 
         outState.putInt(BUNDLE_STATE_SCORE, mScore);
-        outState.putInt(BUNDLE_STATE_QUESTION, mRemainingQuestionCount);
+        outState.putInt(BUNDLE_STATE_REMAINING_QUESTION, mRemainingQuestionCount);
+        outState.putSerializable(BUNDLE_STATE_QUESTION, mQuestionBank);
     }
 
 }

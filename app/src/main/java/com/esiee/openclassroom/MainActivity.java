@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(firstName != null){
             mGreetingTextView.setText(String.format(getString(R.string.welcome_screen_previous_play),firstName, score));
+            mNameEditText.setText(firstName);
             mNameEditText.setSelection(mNameEditText.getText().length());
         }
     }
