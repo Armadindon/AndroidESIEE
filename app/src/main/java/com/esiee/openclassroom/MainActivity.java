@@ -16,9 +16,11 @@ import android.widget.TextView;
 import com.esiee.openclassroom.model.User;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String SHARED_PREF_USER = "SHARED_PREF_USER";
     private static final String SHARED_PREF_USER_INFO = "SHARED_PREF_USER_INFO";
     private static final String SHARED_PREF_USER_INFO_NAME = "SHARED_PREF_USER_INFO_NAME";
     private static final String SHARED_PREF_USER_INFO_SCORE = "SHARED_PREF_USER_INFO_SCORE";
+    private static final String BUNDLE_USER = "BUNDLE_USER";
 
     private static final int GAME_ACTIVITY_REQUEST_CODE = 42;
 
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mUser.setFirstName(mNameEditText.getText().toString());
+                mUser.setScore(0);
                 Intent gameActivityIntent = new Intent(MainActivity.this, GameActivity.class);
+                gameActivityIntent.putExtra(BUNDLE_USER, mUser);
                 startActivityForResult(gameActivityIntent, GAME_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -83,14 +87,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (GAME_ACTIVITY_REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
             // Fetch the score from the Intent
-            int score = data.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0);
+            //mUser.setScore(data.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0));
+            Bundle bundle = data.getExtras();
+            mUser = (User) bundle.getSerializable(BUNDLE_USER);
             getSharedPreferences(SHARED_PREF_USER_INFO, MODE_PRIVATE)
                     .edit()
                     .putString(SHARED_PREF_USER_INFO_NAME, mUser.getFirstName())
-                    .putInt(SHARED_PREF_USER_INFO_SCORE, score)
+                    .putInt(SHARED_PREF_USER_INFO_SCORE, mUser.getScore())
                     .apply();
 
-            mGreetingTextView.setText(String.format(getString(R.string.welcome_screen_previous_play), mUser.getFirstName(), score));
+            mGreetingTextView.setText(String.format(getString(R.string.welcome_screen_previous_play), mUser.getFirstName(), mUser.getScore()));
             mNameEditText.setSelection(mNameEditText.getText().length());
         }
 

@@ -16,20 +16,24 @@ import android.widget.Toast;
 
 import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.QuestionBank;
+import com.esiee.openclassroom.model.User;
 
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
+    //public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
+    private static final String BUNDLE_USER = "BUNDLE_USER";
+    private static final String BUNDLE_STATE_USER = "BUNDLE_STATE_USER";
 
 
     private QuestionBank mQuestionBank;
     private Question mCurrentQuestion;
     private int mRemainingQuestionCount;
     private int mScore;
+    private User mUser;
     private boolean freezeScreen;
 
     private TextView mQuestionTitle;
@@ -54,13 +58,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswer3.setOnClickListener(this);
         mAnswer4.setOnClickListener(this);
 
-
         if (savedInstanceState != null) {
+            mUser = (User) savedInstanceState.getSerializable(BUNDLE_STATE_USER);
             mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
             mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_REMAINING_QUESTION);
             mQuestionBank = (QuestionBank) savedInstanceState.getSerializable(BUNDLE_STATE_QUESTION);
             mCurrentQuestion = mQuestionBank.getCurrentQuestion();
         } else {
+            Intent intent = this.getIntent();
+            Bundle bundle = intent.getExtras();
+            mUser = (User) bundle.getSerializable(BUNDLE_USER);
             mScore = 0;
             mRemainingQuestionCount = 4;
             mQuestionBank = generateQuestionBank();
@@ -184,14 +191,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     displayQuestion(mCurrentQuestion);
                 } else {
                     // Plus de questions; le jeu est finito
-
+                    mUser.setScore(mUser.getScore() + mScore);
                     builder.setTitle(getString(R.string.finish_alert_title))
                             .setMessage(getString(R.string.finish_final_score) + mScore)
                             .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent();
-                                    intent.putExtra(BUNDLE_EXTRA_SCORE, mScore);
+                                    intent.putExtra(BUNDLE_USER, mUser);
                                     setResult(RESULT_OK, intent);
                                     finish();
                                     finish();
@@ -211,6 +218,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         outState.putInt(BUNDLE_STATE_SCORE, mScore);
         outState.putInt(BUNDLE_STATE_REMAINING_QUESTION, mRemainingQuestionCount);
         outState.putSerializable(BUNDLE_STATE_QUESTION, mQuestionBank);
+        outState.putSerializable(BUNDLE_STATE_USER, mUser);
     }
 
 }
