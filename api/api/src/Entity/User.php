@@ -9,37 +9,53 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ["groups" => ["user:read"]],
+    denormalizationContext: ["groups" => ["user:write"]],
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["user:read"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(["user:read","user:write"])]
     private $username;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(["user:read"])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["user:read","user:write"])]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["user:read","user:write"])]
     private $lastname;
 
     #[ORM\OneToMany(mappedBy: 'byUser', targetEntity: Score::class, orphanRemoval: true)]
+    #[Groups(["user:read"])]
     private $scores;
 
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Question::class)]
+    #[Groups(["user:read"])]
     private $createdQuestions;
+
+    #[Groups(["user:write"])]
+    #[SerializedName("password")]
+    private $plainPassword;
 
     public function __construct()
     {
@@ -127,8 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstname(): ?string
@@ -211,6 +226,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $createdQuestion->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
