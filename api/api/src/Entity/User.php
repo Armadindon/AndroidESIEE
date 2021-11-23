@@ -34,7 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups(["user:read"])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
