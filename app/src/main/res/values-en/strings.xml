@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenClassroom</string>
+    <string name="app_name">Squizzy</string>
     <string name="welcome_screen">Welcome to TopQuiz. What is your name ?</string>
     <string name="enter_your_name">Please type your name.</string>
     <string name="play_button">Play !</string>
@@ -29,7 +29,7 @@
 
     <string name="signup_login_input_placeholder">Username</string>
     <string name="signup_firstname_input_placeholder">Firstname</string>
-    <string name="signup_lastname_input_placeholder">Lastame</string>
+    <string name="signup_lastname_input_placeholder">Lastname</string>
     <string name="signup_password_input_placeholder">••••••••••</string>
     <string name="signup_button_signup_placeholder">Sign up</string>
     <string name="signup_link_connection_placeholder">have an account ?</string>

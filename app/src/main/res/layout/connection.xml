@@ -8,62 +8,62 @@
     tools:context=".Connection">
 
     <TextView
-        android:id="@+id/signup_title"
+        android:id="@+id/connection_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:text="@string/app_title"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/signup_edittext_login"
+        android:id="@+id/connection_edittext_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="130dp"
         android:autofillHints="AUTOFILL_HINT_USERNAME"
         android:ems="10"
         android:inputType="text"
-        android:text="@string/connection_login_input_placeholder"
+        android:hint="@string/connection_login_input_placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_title"
+        app:layout_constraintTop_toBottomOf="@+id/connection_title"
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/signup_edittext_password"
+        android:id="@+id/connection_edittext_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
+        android:autofillHints="AUTOFILL_HINT_PASSWORD"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/connection_password_input_placeholder"
+        android:hint="@string/connection_password_input_placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_login"
-        android:autofillHints="AUTOFILL_HINT_PASSWORD"
+        app:layout_constraintTop_toBottomOf="@+id/connection_edittext_login"
         tools:ignore="LabelFor" />
 
     <Button
-        android:id="@+id/signup_button_signup"
+        android:id="@+id/connection_button_connection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:text="@string/connection_button_signup_placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_password" />
+        app:layout_constraintTop_toBottomOf="@+id/connection_edittext_password" />
 
     <TextView
-        android:id="@+id/signup_link_connection"
+        android:id="@+id/connection_link_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="@string/connection_link_connection_placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_button_signup" />
+        app:layout_constraintTop_toBottomOf="@+id/connection_button_connection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
