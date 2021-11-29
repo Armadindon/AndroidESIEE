@@ -14,12 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.QuestionBank;
 
 import java.util.Arrays;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class Questions extends AppCompatActivity implements View.OnClickListener {
     public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
@@ -27,7 +26,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private QuestionBank mQuestionBank;
-    private Question mCurrentQuestion;
+    private com.esiee.openclassroom.model.Question mCurrentQuestion;
     private int mRemainingQuestionCount;
     private int mScore;
     private boolean freezeScreen;
@@ -41,7 +40,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.questions);
 
         mQuestionTitle = findViewById(R.id.game_activity_textview_question);
         mAnswer1 = findViewById(R.id.game_activity_button_1);
@@ -73,7 +72,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private QuestionBank generateQuestionBank() {
         //On initialise le modèle
-        Question question1 = new Question(
+        com.esiee.openclassroom.model.Question question1 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_1),
                 Arrays.asList(
                         getString(R.string.question_1_answer_1),
@@ -84,7 +83,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 0
         );
 
-        Question question2 = new Question(
+        com.esiee.openclassroom.model.Question question2 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_2),
                 Arrays.asList(
                         getString(R.string.question_2_answer_1),
@@ -95,7 +94,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 3
         );
 
-        Question question3 = new Question(
+        com.esiee.openclassroom.model.Question question3 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_3),
                 Arrays.asList(
                         getString(R.string.question_3_answer_1),
@@ -106,7 +105,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 3
         );
 
-        Question question4 = new Question(
+        com.esiee.openclassroom.model.Question question4 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_4),
                 Arrays.asList(
                         getString(R.string.question_4_answer_1),
@@ -117,7 +116,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 0
         );
 
-        Question question5 = new Question(
+        com.esiee.openclassroom.model.Question question5 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_5),
                 Arrays.asList(
                         getString(R.string.question_5_answer_1),
@@ -131,7 +130,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return new QuestionBank(Arrays.asList(question1, question2, question3, question4, question5));
     }
 
-    private void displayQuestion(final Question question) {
+    private void displayQuestion(final com.esiee.openclassroom.model.Question question) {
         // Set the text for the question text view and the four buttons
         mCurrentQuestion = question;
 
