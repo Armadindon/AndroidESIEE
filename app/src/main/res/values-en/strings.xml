@@ -24,4 +24,12 @@
     <string name="welcome_screen_previous_play">Welcome Back %s !\n Your last score was %d; Wil you do better this time ?</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="best_score">Your best score :</string>
+
+    <string name="app_title">Squizzy</string>
+    <string name="signup_login_input_placeholder">Username</string>
+    <string name="signup_firstname_input_placeholder">Firstname</string>
+    <string name="signup_lastname_input_placeholder">Lastame</string>
+    <string name="signup_password_input_placeholder">••••••••••</string>
+    <string name="signup_button_signup_placeholder">Sign up</string>
+    <string name="signup_link_connection_placeholder">have an account ?</string>
 </resources>

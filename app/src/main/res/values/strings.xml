@@ -44,4 +44,13 @@
     <string name="leaderboard">Classement</string>
     <string name="best_score">Votre meilleur score :</string>
 
+
+    <string name="app_title">Squizzy</string>
+    <string name="signup_login_input_placeholder">Pseudonyme</string>
+    <string name="signup_firstname_input_placeholder">Prénom</string>
+    <string name="signup_lastname_input_placeholder">Nom</string>
+    <string name="signup_password_input_placeholder">••••••••••</string>
+    <string name="signup_button_signup_placeholder">S\'inscrire</string>
+    <string name="signup_link_connection_placeholder">déjà un compte?</string>
+
 </resources>
