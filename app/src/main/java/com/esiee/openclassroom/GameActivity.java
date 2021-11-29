@@ -82,56 +82,46 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         //On initialise le modèle
         Question question1 = new Question(
                 getString(R.string.question_1),
-                Arrays.asList(
-                        getString(R.string.question_1_answer_1),
-                        getString(R.string.question_1_answer_2),
-                        getString(R.string.question_1_answer_3),
-                        getString(R.string.question_1_answer_4)
-                ),
+                getString(R.string.question_1_answer_1),
+                getString(R.string.question_1_answer_2),
+                getString(R.string.question_1_answer_3),
+                getString(R.string.question_1_answer_4),
                 0
         );
 
         Question question2 = new Question(
                 getString(R.string.question_2),
-                Arrays.asList(
-                        getString(R.string.question_2_answer_1),
-                        getString(R.string.question_2_answer_2),
-                        getString(R.string.question_2_answer_3),
-                        getString(R.string.question_2_answer_4)
-                ),
+                getString(R.string.question_2_answer_1),
+                getString(R.string.question_2_answer_2),
+                getString(R.string.question_2_answer_3),
+                getString(R.string.question_2_answer_4),
                 3
         );
 
         Question question3 = new Question(
                 getString(R.string.question_3),
-                Arrays.asList(
-                        getString(R.string.question_3_answer_1),
-                        getString(R.string.question_3_answer_2),
-                        getString(R.string.question_3_answer_3),
-                        getString(R.string.question_3_answer_4)
-                ),
+                getString(R.string.question_3_answer_1),
+                getString(R.string.question_3_answer_2),
+                getString(R.string.question_3_answer_3),
+                getString(R.string.question_3_answer_4),
                 3
         );
 
         Question question4 = new Question(
                 getString(R.string.question_4),
-                Arrays.asList(
-                        getString(R.string.question_4_answer_1),
-                        getString(R.string.question_4_answer_2),
-                        getString(R.string.question_4_answer_3),
-                        getString(R.string.question_4_answer_4)
-                ),
+                getString(R.string.question_4_answer_1),
+                getString(R.string.question_4_answer_2),
+                getString(R.string.question_4_answer_3),
+                getString(R.string.question_4_answer_4),
                 0
         );
 
         Question question5 = new Question(
                 getString(R.string.question_5),
-                Arrays.asList(
-                        getString(R.string.question_5_answer_1),
-                        getString(R.string.question_5_answer_2),
-                        getString(R.string.question_5_answer_3),
-                        getString(R.string.question_5_answer_4)
-                ),
+                getString(R.string.question_5_answer_1),
+                getString(R.string.question_5_answer_2),
+                getString(R.string.question_5_answer_3),
+                getString(R.string.question_5_answer_4),
                 1
         );
 
@@ -142,11 +132,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // Set the text for the question text view and the four buttons
         mCurrentQuestion = question;
 
-        mQuestionTitle.setText(question.getQuestion());
-        mAnswer1.setText(question.getChoiceList().get(0));
-        mAnswer2.setText(question.getChoiceList().get(1));
-        mAnswer3.setText(question.getChoiceList().get(2));
-        mAnswer4.setText(question.getChoiceList().get(3));
+        mQuestionTitle.setText(question.getContent());
+        mAnswer1.setText(question.getAnswer1());
+        mAnswer2.setText(question.getAnswer2());
+        mAnswer3.setText(question.getAnswer3());
+        mAnswer4.setText(question.getAnswer4());
     }
 
     @Override
