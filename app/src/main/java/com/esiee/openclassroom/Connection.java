@@ -26,6 +26,7 @@ public class Connection extends AppCompatActivity {
         mConnectionButton = findViewById(R.id.connection_button_connection);
         mConnectionLink = findViewById(R.id.connection_link_signup);
 
+        //passage layout connection au layout signup, sans passation de paramètres spécifiques
         mConnectionLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -24,7 +24,6 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
 
-
     private QuestionBank mQuestionBank;
     private com.esiee.openclassroom.model.Question mCurrentQuestion;
     private int mRemainingQuestionCount;
@@ -36,23 +35,24 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private Button mAnswer2;
     private Button mAnswer3;
     private Button mAnswer4;
+    private Button mReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.questions);
 
-        mQuestionTitle = findViewById(R.id.game_activity_textview_question);
-        mAnswer1 = findViewById(R.id.game_activity_button_1);
-        mAnswer2 = findViewById(R.id.game_activity_button_2);
-        mAnswer3 = findViewById(R.id.game_activity_button_3);
-        mAnswer4 = findViewById(R.id.game_activity_button_4);
+        mQuestionTitle = findViewById(R.id.questions_textview_question);
+        mAnswer1 = findViewById(R.id.questions_button_answer1);
+        mAnswer2 = findViewById(R.id.questions_button_answer2);
+        mAnswer3 = findViewById(R.id.questions_button_answer3);
+        mAnswer4 = findViewById(R.id.questions_button_answer4);
+        mReturn = findViewById(R.id.questions_button_return);
 
         mAnswer1.setOnClickListener(this);
         mAnswer2.setOnClickListener(this);
         mAnswer3.setOnClickListener(this);
         mAnswer4.setOnClickListener(this);
-
 
         if (savedInstanceState != null) {
             mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
@@ -68,6 +68,26 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
         System.out.println(mQuestionBank);
         displayQuestion(mCurrentQuestion);
         freezeScreen = false;
+
+        mReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Questions.this)
+                    .setTitle("Retour à l'accueil")
+                    .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
+                            startActivityForResult(signUpIntent, 0);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            }
+        });
+
+
     }
 
     private QuestionBank generateQuestionBank() {

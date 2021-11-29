@@ -24,14 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".Questions"
+            android:name=".QuestionCreation"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Questions"
             android:exported="false" />
     </application>
 
