@@ -22,4 +22,6 @@
     <string name="question_5_answer_4">Play Gorilla Tag with a VR Headset</string>
     <string name="question_5_answer_1" translatable="false">Finish the android TP</string>
     <string name="welcome_screen_previous_play">Welcome Back %s !\n Your last score was %d; Wil you do better this time ?</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="best_score">Your best score :</string>
 </resources>

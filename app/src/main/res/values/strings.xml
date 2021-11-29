@@ -41,4 +41,7 @@
     <string name="finish_alert_title">Bien joué !</string>
     <string name="finish_final_score">Votre score final est de : </string>
     <string name="finish_final_button">OK</string>
+    <string name="leaderboard">Classement</string>
+    <string name="best_score">Votre meilleur score :</string>
+
 </resources>
