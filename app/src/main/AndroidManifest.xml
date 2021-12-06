@@ -13,10 +13,10 @@
             android:name=".Leaderboard"
             android:exported="false" />
         <activity
-            android:name=".Menu"
+            android:name=".Connection"
             android:exported="false" />
         <activity
-            android:name=".Questions"
+            android:name=".Menu"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Connection"
+            android:name=".Questions"
             android:exported="false" />
 
         <meta-data

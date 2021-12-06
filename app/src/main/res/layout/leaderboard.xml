@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Leaderboard">
 
+    <Button
+        android:id="@+id/leaderboard_button_return"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="2dp" />
+
     <TextView
         android:id="@+id/leaderboard_textview_title"
         style="@style/TitleText"

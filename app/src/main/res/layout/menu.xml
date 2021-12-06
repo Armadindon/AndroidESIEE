@@ -10,24 +10,27 @@
     <TextView
         android:id="@+id/menu_title"
         style="@style/TitleText"
+        android:text="@string/app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="80dp"
-        android:text="@string/app_title"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="28dp"
+        android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menu_button_quiz"
         style="@style/Buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="70dp"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_title"
         tools:text="@string/menu_button_quiz" />
@@ -35,11 +38,12 @@
     <Button
         android:id="@+id/menu_button_leaderboard"
         style="@style/Buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,15 +53,23 @@
     <Button
         android:id="@+id/menu_button_questioncreation"
         style="@style/Buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button_leaderboard"
         tools:text="@string/menu_button_questioncreation" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/brain"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

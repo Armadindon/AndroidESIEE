@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <style
         name="TitleText"
         parent="@style/TextAppearance.AppCompat.Title">
         <item name="android:textSize">40dp</item>
+        <item name="android:gravity">center_horizontal</item>
         <item name="android:fontFamily">@font/bungee_shade</item>
         <item name="android:textColor">#008</item>
         <item name="android:layout_width">match_parent</item>
@@ -14,19 +17,50 @@
     <style
         name="Buttons"
         parent="@style/Widget.AppCompat.Button">
-        <item name="android:background">@color/purple_700</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/purple_300</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">center</item>
+
     </style>
 
     <style
         name="QuestionButton"
         parent="@style/Widget.AppCompat.Button">
-        <item name="android:foreground">@drawable/gradient</item>
+        <item name="android:background">@drawable/gradient</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:padding">16dp</item>
-        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
+    <style
+        name="QuestionButtonHorizontal"
+        parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/gradient</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style
+        name="QuestionText"
+        parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/quicksand</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
 
