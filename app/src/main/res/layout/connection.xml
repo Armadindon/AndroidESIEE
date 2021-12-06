@@ -11,8 +11,6 @@
     <TextView
         android:id="@+id/connection_title"
         style="@style/TitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="80dp"
         android:text="@string/app_title"
@@ -59,7 +57,7 @@
 
     <TextView
         android:id="@+id/connection_link_signup"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="12dp"
