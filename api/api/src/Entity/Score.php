@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     normalizationContext: ["groups" => ["user:read"]],
     denormalizationContext: ["groups" => ["user:write"]],
+    order: ["score" => "DESC"]
 )]
 class Score
 {
