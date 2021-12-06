@@ -38,4 +38,8 @@
     <string name="connection_password_input_placeholder">••••••••••</string>
     <string name="connection_button_signup_placeholder">Log in</string>
     <string name="connection_link_connection_placeholder">Sign up !</string>
+
+    <string name="menu_button_quiz">Quiz</string>
+    <string name="menu_button_leaderboard">Leaderboard</string>
+    <string name="menu_button_questioncreation">Create a question</string>
 </resources>

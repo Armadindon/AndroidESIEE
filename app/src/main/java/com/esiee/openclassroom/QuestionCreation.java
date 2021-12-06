@@ -40,8 +40,8 @@ public class QuestionCreation extends AppCompatActivity {
                         .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
-                                startActivityForResult(signUpIntent, 0);
+                                Intent menuIntent = new Intent(v.getContext(), Menu.class);
+                                startActivityForResult(menuIntent, 0);
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)

@@ -60,5 +60,8 @@
     <string name="connection_button_signup_placeholder">Se connecter</string>
     <string name="connection_link_connection_placeholder">Inscrivez-vous !</string>
 
+    <string name="menu_button_quiz">Quiz</string>
+    <string name="menu_button_leaderboard">Leaderboard</string>
+    <string name="menu_button_questioncreation">Créer une question</string>
 
 </resources>
