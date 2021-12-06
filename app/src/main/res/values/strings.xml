@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">OpenClassroom</string>
+    <string name="app_name">Squizzy</string>
+
     <string name="welcome_screen">Bienvenue dans TopQuiz. Quel est votre prénom ?</string>
     <string name="welcome_screen_previous_play">Et rebonjour %s !\n Ton dernier score était de %d; vas tu faire mieux cette fois ?</string>
     <string name="enter_your_name">Merci d\'entrez votre prénom</string>
@@ -41,4 +42,26 @@
     <string name="finish_alert_title">Bien joué !</string>
     <string name="finish_final_score">Votre score final est de : </string>
     <string name="finish_final_button">OK</string>
+    <string name="leaderboard">Classement</string>
+    <string name="best_score">Votre meilleur score :</string>
+
+
+    <string name="app_title">Squizzy</string>
+
+    <string name="signup_login_input_placeholder">Pseudo</string>
+    <string name="signup_firstname_input_placeholder">Prénom</string>
+    <string name="signup_lastname_input_placeholder">Nom</string>
+    <string name="signup_password_input_placeholder">••••••••••</string>
+    <string name="signup_button_signup_placeholder">S\'inscrire</string>
+    <string name="signup_link_connection_placeholder">Déjà un compte?</string>
+
+    <string name="connection_login_input_placeholder">Pseudonyme</string>
+    <string name="connection_password_input_placeholder">••••••••••</string>
+    <string name="connection_button_signup_placeholder">Se connecter</string>
+    <string name="connection_link_connection_placeholder">Inscrivez-vous !</string>
+
+    <string name="menu_button_quiz">Quiz</string>
+    <string name="menu_button_leaderboard">Leaderboard</string>
+    <string name="menu_button_questioncreation">Créer une question</string>
+
 </resources>

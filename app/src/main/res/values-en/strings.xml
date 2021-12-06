@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OpenClassroom</string>
+    <string name="app_name">Squizzy</string>
     <string name="welcome_screen">Welcome to TopQuiz. What is your name ?</string>
     <string name="enter_your_name">Please type your name.</string>
     <string name="play_button">Play !</string>
-    <string name="question_1">Who is the creatopr of Android ?</string>
+    <string name="question_1">Who is the creator of Android ?</string>
     <string name="question_3">What is the house number of the simpsons ?</string>
     <string name="question_2">In which year the first man landed on the moon ?</string>
-    <string name="correct_answer">Correct !</string>
+    <string name="correct_answer">Well done !</string>
     <string name="wrong_answer">Wrong answer :c</string>
     <string name="finish_alert_title">Well done !</string>
     <string name="finish_final_score">"Your final score is : "</string>
@@ -18,8 +18,28 @@
     <string name="question_4_answer_3">The clementine</string>
     <string name="question_4_answer_4">The durian</string>
     <string name="question_5">What is the purpose of life ?</string>
-    <string name="question_5_answer_3">Don\'t die</string>
+    <string name="question_5_answer_3">To not die</string>
     <string name="question_5_answer_4">Play Gorilla Tag with a VR Headset</string>
     <string name="question_5_answer_1" translatable="false">Finish the android TP</string>
     <string name="welcome_screen_previous_play">Welcome Back %s !\n Your last score was %d; Wil you do better this time ?</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="best_score">Your best score :</string>
+
+    <string name="app_title">Squizzy</string>
+
+    <string name="signup_login_input_placeholder">Username</string>
+    <string name="signup_firstname_input_placeholder">Firstname</string>
+    <string name="signup_lastname_input_placeholder">Lastname</string>
+    <string name="signup_password_input_placeholder">••••••••••</string>
+    <string name="signup_button_signup_placeholder">Sign up</string>
+    <string name="signup_link_connection_placeholder">Log in</string>
+
+    <string name="connection_login_input_placeholder">Username</string>
+    <string name="connection_password_input_placeholder">••••••••••</string>
+    <string name="connection_button_signup_placeholder">Log in</string>
+    <string name="connection_link_connection_placeholder">Sign up !</string>
+
+    <string name="menu_button_quiz">Quiz</string>
+    <string name="menu_button_leaderboard">Leaderboard</string>
+    <string name="menu_button_questioncreation">Create a question</string>
 </resources>

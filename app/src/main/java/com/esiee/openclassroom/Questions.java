@@ -28,9 +28,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private static final String BUNDLE_USER = "BUNDLE_USER";
     private static final String BUNDLE_STATE_USER = "BUNDLE_STATE_USER";
 
-
     private QuestionBank mQuestionBank;
-    private Question mCurrentQuestion;
+    private com.esiee.openclassroom.model.Question mCurrentQuestion;
     private int mRemainingQuestionCount;
     private int mScore;
     private User mUser;
@@ -41,17 +40,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button mAnswer2;
     private Button mAnswer3;
     private Button mAnswer4;
+    private Button mReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.questions);
 
-        mQuestionTitle = findViewById(R.id.game_activity_textview_question);
-        mAnswer1 = findViewById(R.id.game_activity_button_1);
-        mAnswer2 = findViewById(R.id.game_activity_button_2);
-        mAnswer3 = findViewById(R.id.game_activity_button_3);
-        mAnswer4 = findViewById(R.id.game_activity_button_4);
+        mQuestionTitle = findViewById(R.id.questions_textview_question);
+        mAnswer1 = findViewById(R.id.questions_button_answer1);
+        mAnswer2 = findViewById(R.id.questions_button_answer2);
+        mAnswer3 = findViewById(R.id.questions_button_answer3);
+        mAnswer4 = findViewById(R.id.questions_button_answer4);
+        mReturn = findViewById(R.id.questions_button_return);
 
         mAnswer1.setOnClickListener(this);
         mAnswer2.setOnClickListener(this);
@@ -76,11 +77,31 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         System.out.println(mQuestionBank);
         displayQuestion(mCurrentQuestion);
         freezeScreen = false;
+
+        mReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Questions.this)
+                    .setTitle("Retour à l'accueil")
+                    .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
+                            startActivityForResult(signUpIntent, 0);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            }
+        });
+
+
     }
 
     private QuestionBank generateQuestionBank() {
         //On initialise le modèle
-        Question question1 = new Question(
+        com.esiee.openclassroom.model.Question question1 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_1),
                 getString(R.string.question_1_answer_1),
                 getString(R.string.question_1_answer_2),
@@ -89,7 +110,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 0
         );
 
-        Question question2 = new Question(
+        com.esiee.openclassroom.model.Question question2 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_2),
                 getString(R.string.question_2_answer_1),
                 getString(R.string.question_2_answer_2),
@@ -98,7 +119,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 3
         );
 
-        Question question3 = new Question(
+        com.esiee.openclassroom.model.Question question3 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_3),
                 getString(R.string.question_3_answer_1),
                 getString(R.string.question_3_answer_2),
@@ -107,7 +128,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 3
         );
 
-        Question question4 = new Question(
+        com.esiee.openclassroom.model.Question question4 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_4),
                 getString(R.string.question_4_answer_1),
                 getString(R.string.question_4_answer_2),
@@ -116,7 +137,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 0
         );
 
-        Question question5 = new Question(
+        com.esiee.openclassroom.model.Question question5 = new com.esiee.openclassroom.model.Question(
                 getString(R.string.question_5),
                 getString(R.string.question_5_answer_1),
                 getString(R.string.question_5_answer_2),
@@ -128,7 +149,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return new QuestionBank(Arrays.asList(question1, question2, question3, question4, question5));
     }
 
-    private void displayQuestion(final Question question) {
+    private void displayQuestion(final com.esiee.openclassroom.model.Question question) {
         // Set the text for the question text view and the four buttons
         mCurrentQuestion = question;
 
