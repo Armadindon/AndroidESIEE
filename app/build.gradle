@@ -5,6 +5,10 @@ plugins {
 android {
     compileSdk 31
 
+    def apiPropertiesFile = rootProject.file("api.properties")
+    def apiProperties = new Properties()
+    apiProperties.load(new FileInputStream(apiPropertiesFile))
+
     defaultConfig {
         applicationId "com.esiee.openclassroom"
         minSdk 17
@@ -13,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "API_URL", apiProperties["API_URL"]
     }
 
     buildTypes {

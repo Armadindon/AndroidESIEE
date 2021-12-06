@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.esiee.openclassroom.model.Score;
+import com.esiee.openclassroom.BuildConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -53,27 +54,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "[\n" +
-                "  {\n" +
-                "    \"username\": \"Dindon\",\n" +
-                "    \"firstname\": \"Baptiste\",\n" +
-                "    \"lastname\": \"Perrin\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"username\": \"vinc\",\n" +
-                "    \"firstname\": \"Vincent\",\n" +
-                "    \"lastname\": \"Monnot\"\n" +
-                "  }\n" +
-                "]";
-        try{
-            User[] users = mapper.readValue(json, User[].class);
-            for(User user: users){
-                System.out.println(user.getUsername());
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                User[] users = ApiTools.getAllUsers();
+                String token = ApiTools.getToken();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        });
+
+        thread.start();
 
         mQuestionTitle = findViewById(R.id.game_activity_textview_question);
         mAnswer1 = findViewById(R.id.game_activity_button_1);
