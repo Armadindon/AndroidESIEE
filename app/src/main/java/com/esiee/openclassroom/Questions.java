@@ -20,7 +20,7 @@ import com.esiee.openclassroom.model.User;
 
 import java.util.Arrays;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class Questions extends AppCompatActivity implements View.OnClickListener {
     //public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
@@ -202,7 +202,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     displayQuestion(mCurrentQuestion);
                 } else {
                     // Plus de questions; le jeu est finito
-                    mUser.setScore(mUser.getScore() + mScore);
+                    //TODO : score utilisateur à modifier/créer
+                    //mUser.setScore(mUser.getScore() + mScore);
                     builder.setTitle(getString(R.string.finish_alert_title))
                             .setMessage(getString(R.string.finish_final_score) + mScore)
                             .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
