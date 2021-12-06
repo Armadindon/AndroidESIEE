@@ -16,7 +16,7 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".Questions"
+            android:name=".SignUp"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".SignUp"
+            android:name=".Questions"
             android:exported="false" />
         <activity
             android:name=".QuestionCreation"
