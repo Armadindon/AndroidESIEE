@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.esiee.openclassroom.model.Score;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +22,7 @@ import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.QuestionBank;
 import com.esiee.openclassroom.model.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,13 +31,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
     private static final String BUNDLE_USER = "BUNDLE_USER";
+    private static final String BUNDLE_SCORE = "BUNDLE_SCORE";
     private static final String BUNDLE_STATE_USER = "BUNDLE_STATE_USER";
 
 
     private QuestionBank mQuestionBank;
     private Question mCurrentQuestion;
     private int mRemainingQuestionCount;
-    private int mScore;
+    private Score mScore;
     private User mUser;
     private boolean freezeScreen;
 
@@ -47,6 +53,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "[\n" +
+                "  {\n" +
+                "    \"username\": \"Dindon\",\n" +
+                "    \"firstname\": \"Baptiste\",\n" +
+                "    \"lastname\": \"Perrin\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"username\": \"vinc\",\n" +
+                "    \"firstname\": \"Vincent\",\n" +
+                "    \"lastname\": \"Monnot\"\n" +
+                "  }\n" +
+                "]";
+        try{
+            User[] users = mapper.readValue(json, User[].class);
+            for(User user: users){
+                System.out.println(user.getUsername());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         mQuestionTitle = findViewById(R.id.game_activity_textview_question);
         mAnswer1 = findViewById(R.id.game_activity_button_1);
         mAnswer2 = findViewById(R.id.game_activity_button_2);
@@ -60,7 +88,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (savedInstanceState != null) {
             mUser = (User) savedInstanceState.getSerializable(BUNDLE_STATE_USER);
-            mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
+            mScore = (Score) savedInstanceState.getSerializable(BUNDLE_STATE_SCORE);
             mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_REMAINING_QUESTION);
             mQuestionBank = (QuestionBank) savedInstanceState.getSerializable(BUNDLE_STATE_QUESTION);
             mCurrentQuestion = mQuestionBank.getCurrentQuestion();
@@ -68,7 +96,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
             mUser = (User) bundle.getSerializable(BUNDLE_USER);
-            mScore = 0;
+            mScore = new Score(0, mUser);
             mRemainingQuestionCount = 4;
             mQuestionBank = generateQuestionBank();
             mCurrentQuestion = mQuestionBank.getNextQuestion();
@@ -162,7 +190,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (index == mCurrentQuestion.getAnswerIndex()) {
             Toast.makeText(this, getString(R.string.correct_answer), Toast.LENGTH_SHORT).show();
-            mScore++;
+            mScore.setScore(mScore.getScore() + 1);
         } else {
             Toast.makeText(this, getString(R.string.wrong_answer), Toast.LENGTH_SHORT).show();
         }
@@ -181,14 +209,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     displayQuestion(mCurrentQuestion);
                 } else {
                     // Plus de questions; le jeu est finito
-                    mUser.setScore(mUser.getScore() + mScore);
+                    // Upload du score en bdd
                     builder.setTitle(getString(R.string.finish_alert_title))
-                            .setMessage(getString(R.string.finish_final_score) + mScore)
+                            .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
                             .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent();
                                     intent.putExtra(BUNDLE_USER, mUser);
+                                    intent.putExtra(BUNDLE_SCORE, mScore);
                                     setResult(RESULT_OK, intent);
                                     finish();
                                     finish();
@@ -205,9 +234,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(BUNDLE_STATE_SCORE, mScore);
         outState.putInt(BUNDLE_STATE_REMAINING_QUESTION, mRemainingQuestionCount);
         outState.putSerializable(BUNDLE_STATE_QUESTION, mQuestionBank);
+        outState.putSerializable(BUNDLE_STATE_SCORE, mScore);
         outState.putSerializable(BUNDLE_STATE_USER, mUser);
     }
 

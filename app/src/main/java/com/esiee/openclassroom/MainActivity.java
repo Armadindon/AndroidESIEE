@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.esiee.openclassroom.model.Score;
 import com.esiee.openclassroom.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String SHARED_PREF_USER_INFO_NAME = "SHARED_PREF_USER_INFO_NAME";
     private static final String SHARED_PREF_USER_INFO_SCORE = "SHARED_PREF_USER_INFO_SCORE";
     private static final String BUNDLE_USER = "BUNDLE_USER";
+    private static final String BUNDLE_SCORE = "BUNDLE_SCORE";
 
     private static final int GAME_ACTIVITY_REQUEST_CODE = 42;
 
     private User mUser;
+    private Score mScore;
     private TextView mGreetingTextView;
     private EditText mNameEditText;
     private Button mPlayButton;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mUser = new User();
+        mScore = new Score();
 
         mGreetingTextView = findViewById(R.id.main_textview_greeting);
         mNameEditText = findViewById(R.id.main_edittext_name);
@@ -62,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUser.setFirstName(mNameEditText.getText().toString());
-                mUser.setScore(0);
+                mUser.setFirstname(mNameEditText.getText().toString());
+                mScore.setUser(mUser);
+                mScore.setScore(0);
                 Intent gameActivityIntent = new Intent(MainActivity.this, GameActivity.class);
                 gameActivityIntent.putExtra(BUNDLE_USER, mUser);
                 startActivityForResult(gameActivityIntent, GAME_ACTIVITY_REQUEST_CODE);
@@ -90,13 +95,14 @@ public class MainActivity extends AppCompatActivity {
             //mUser.setScore(data.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0));
             Bundle bundle = data.getExtras();
             mUser = (User) bundle.getSerializable(BUNDLE_USER);
+            mScore = (Score) bundle.getSerializable(BUNDLE_SCORE);
             getSharedPreferences(SHARED_PREF_USER_INFO, MODE_PRIVATE)
                     .edit()
-                    .putString(SHARED_PREF_USER_INFO_NAME, mUser.getFirstName())
-                    .putInt(SHARED_PREF_USER_INFO_SCORE, mUser.getScore())
+                    .putString(SHARED_PREF_USER_INFO_NAME, mUser.getFirstname())
+                    .putInt(SHARED_PREF_USER_INFO_SCORE, mScore.getScore())
                     .apply();
 
-            mGreetingTextView.setText(String.format(getString(R.string.welcome_screen_previous_play), mUser.getFirstName(), mUser.getScore()));
+            mGreetingTextView.setText(String.format(getString(R.string.welcome_screen_previous_play), mUser.getFirstname(), mScore.getScore()));
             mNameEditText.setSelection(mNameEditText.getText().length());
         }
 
