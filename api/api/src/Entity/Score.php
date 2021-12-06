@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ScoreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ["groups" => ["user:read"]],
+    denormalizationContext: ["groups" => ["user:write"]],
+)]
 class Score
 {
     #[ORM\Id]
@@ -16,10 +20,12 @@ class Score
     private $id;
 
     #[ORM\Column(type: 'smallint')]
+    #[Groups(["user:read","user:write"])]
     private $score;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["user:read","user:write"])]
     private $byUser;
 
     public function getId(): ?int

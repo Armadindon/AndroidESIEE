@@ -23,7 +23,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["user:read"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -45,11 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastname;
 
     #[ORM\OneToMany(mappedBy: 'byUser', targetEntity: Score::class, orphanRemoval: true)]
-    #[Groups(["user:read"])]
     private $scores;
 
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Question::class)]
-    #[Groups(["user:read"])]
     private $createdQuestions;
 
     #[Groups(["user:write"])]
