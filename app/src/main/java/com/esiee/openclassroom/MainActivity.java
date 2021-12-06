@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.esiee.openclassroom.model.Score;
 import com.esiee.openclassroom.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String SHARED_PREF_USER_INFO_NAME = "SHARED_PREF_USER_INFO_NAME";
     private static final String SHARED_PREF_USER_INFO_SCORE = "SHARED_PREF_USER_INFO_SCORE";
     private static final String BUNDLE_USER = "BUNDLE_USER";
+    private static final String BUNDLE_SCORE = "BUNDLE_SCORE";
 
     private static final int GAME_ACTIVITY_REQUEST_CODE = 42;
 
     private User mUser;
+    private Score mScore;
     private TextView mGreetingTextView;
     private EditText mNameEditText;
     private Button mPlayButton;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mUser = new User();
+        mScore = new Score();
 
         mGreetingTextView = findViewById(R.id.main_textview_greeting);
         mNameEditText = findViewById(R.id.main_edittext_name);
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mUser.setFirstname(mNameEditText.getText().toString());
+                //TODO: score utilisateur
                 //mUser.setScore(0);
                 Intent gameActivityIntent = new Intent(MainActivity.this, Questions.class);
                 gameActivityIntent.putExtra(BUNDLE_USER, mUser);

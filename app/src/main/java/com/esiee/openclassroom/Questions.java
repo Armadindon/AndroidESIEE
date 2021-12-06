@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.esiee.openclassroom.model.Score;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +22,7 @@ import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.QuestionBank;
 import com.esiee.openclassroom.model.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Questions extends AppCompatActivity implements View.OnClickListener {
@@ -26,12 +31,13 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private static final String BUNDLE_STATE_REMAINING_QUESTION = "BUNDLE_STATE_REMAINING_QUESTION";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
     private static final String BUNDLE_USER = "BUNDLE_USER";
+    private static final String BUNDLE_SCORE = "BUNDLE_SCORE";
     private static final String BUNDLE_STATE_USER = "BUNDLE_STATE_USER";
 
     private QuestionBank mQuestionBank;
     private com.esiee.openclassroom.model.Question mCurrentQuestion;
     private int mRemainingQuestionCount;
-    private int mScore;
+    private Score mScore;
     private User mUser;
     private boolean freezeScreen;
 
@@ -61,7 +67,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
 
         if (savedInstanceState != null) {
             mUser = (User) savedInstanceState.getSerializable(BUNDLE_STATE_USER);
-            mScore = savedInstanceState.getInt(BUNDLE_STATE_SCORE);
+            mScore = (Score) savedInstanceState.getSerializable(BUNDLE_STATE_SCORE);
             mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_REMAINING_QUESTION);
             mQuestionBank = (QuestionBank) savedInstanceState.getSerializable(BUNDLE_STATE_QUESTION);
             mCurrentQuestion = mQuestionBank.getCurrentQuestion();
@@ -69,7 +75,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
             mUser = (User) bundle.getSerializable(BUNDLE_USER);
-            mScore = 0;
+            mScore = new Score(0, mUser);
             mRemainingQuestionCount = 4;
             mQuestionBank = generateQuestionBank();
             mCurrentQuestion = mQuestionBank.getNextQuestion();
@@ -183,7 +189,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
 
         if (index == mCurrentQuestion.getAnswerIndex()) {
             Toast.makeText(this, getString(R.string.correct_answer), Toast.LENGTH_SHORT).show();
-            mScore++;
+            mScore.setScore(mScore.getScore() + 1);
         } else {
             Toast.makeText(this, getString(R.string.wrong_answer), Toast.LENGTH_SHORT).show();
         }
@@ -205,12 +211,13 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                     //TODO : score utilisateur à modifier/créer
                     //mUser.setScore(mUser.getScore() + mScore);
                     builder.setTitle(getString(R.string.finish_alert_title))
-                            .setMessage(getString(R.string.finish_final_score) + mScore)
+                            .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
                             .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent();
                                     intent.putExtra(BUNDLE_USER, mUser);
+                                    intent.putExtra(BUNDLE_SCORE, mScore);
                                     setResult(RESULT_OK, intent);
                                     finish();
                                     finish();
@@ -227,9 +234,9 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(BUNDLE_STATE_SCORE, mScore);
         outState.putInt(BUNDLE_STATE_REMAINING_QUESTION, mRemainingQuestionCount);
         outState.putSerializable(BUNDLE_STATE_QUESTION, mQuestionBank);
+        outState.putSerializable(BUNDLE_STATE_SCORE, mScore);
         outState.putSerializable(BUNDLE_STATE_USER, mUser);
     }
 
