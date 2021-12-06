@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signUp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUp">
+
+    <TextView
+        android:id="@+id/signup_title"
+        style="@style/TitleText"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/app_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_edittext_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="AUTOFILL_HINT_USERNAME"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/signup_login_input_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_title"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/signup_edittext_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="AUTOFILL_HINT_GIVEN"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/signup_firstname_input_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_login"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/signup_edittext_lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="AUTOFILL_HINT_FAMILY"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/signup_lastname_input_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_firstname"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/signup_edittext_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="AUTOFILL_HINT_PASSWORD"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/signup_password_input_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_lastname"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/signup_link_connection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_link_connection_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_button_signup" />
+
+    <Button
+        android:id="@+id/signup_button_signup"
+        style="@style/Buttons"
+        android:background="@drawable/gradient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/signup_button_signup_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_edittext_password" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

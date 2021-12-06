@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 mUser.setFirstname(mNameEditText.getText().toString());
                 mScore.setUser(mUser);
                 mScore.setScore(0);
-                Intent gameActivityIntent = new Intent(MainActivity.this, GameActivity.class);
+                Intent gameActivityIntent = new Intent(MainActivity.this, Questions.class);
                 gameActivityIntent.putExtra(BUNDLE_USER, mUser);
                 startActivityForResult(gameActivityIntent, GAME_ACTIVITY_REQUEST_CODE);
             }
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (GAME_ACTIVITY_REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
             // Fetch the score from the Intent
+            //TODO : score utilisateur à modifier/créer
             //mUser.setScore(data.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0));
             Bundle bundle = data.getExtras();
             mUser = (User) bundle.getSerializable(BUNDLE_USER);
