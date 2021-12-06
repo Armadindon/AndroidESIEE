@@ -23,7 +23,7 @@
         android:layout_width="350dp"
         android:layout_height="150dp"
         android:layout_marginTop="60dp"
-        android:background="@color/teal_700"
+        android:background="@color/blue"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -38,6 +38,7 @@
 
     <Button
         android:id="@+id/questions_button_answer1"
+        style="@style/Buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"

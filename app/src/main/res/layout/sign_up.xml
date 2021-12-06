@@ -10,12 +10,12 @@
 
     <TextView
         android:id="@+id/signup_title"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="80dp"
         android:text="@string/app_title"
-        android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,6 +87,9 @@
 
     <Button
         android:id="@+id/signup_button_signup"
+        style="@style/Buttons"
+        android:backgroundTint="@drawable/gradient"
+        android:textColor="@drawable/gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
