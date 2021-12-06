@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/signup_title"
         style="@style/TitleText"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="80dp"
         android:text="@string/app_title"
         app:layout_constraintStart_toStartOf="parent"
