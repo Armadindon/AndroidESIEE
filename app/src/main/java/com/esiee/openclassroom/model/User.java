@@ -4,70 +4,50 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private int mId;
-    private String mUsername;
-    private String mFirstName;
-    private String mLastName;
-    private String mPassword;
-    private int mScore;
+    private String username;
+    private String firstname;
+    private String lastname;
+    private String password;
 
     public User() {
     }
 
-    public User(int mId, String mUsername, String mFirstName, String mLastName, String mPassword, int mScore) {
-        this.mId = mId;
-        this.mUsername = mUsername;
-        this.mFirstName = mFirstName;
-        this.mLastName = mLastName;
-        this.mPassword = mPassword;
-        this.mScore = mScore;
-    }
-
-        public int getId() {
-        return mId;
-    }
-
-    public void setId(int mId) {
-        this.mId = mId;
+    public User(String username, String firstname, String lastname, String password) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
     }
 
     public String getUsername() {
-        return mUsername;
+        return username;
     }
 
-    public void setUsername(String mUsername) {
-        this.mUsername = mUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getFirstName() {
-        return mFirstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String mFirstName) {
-        this.mFirstName = mFirstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return mLastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String mLastName) {
-        this.mLastName = mLastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPassword() {
-        return mPassword;
+        return password;
     }
 
-    public void setPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
-
-    public int getScore() {
-        return mScore;
-    }
-
-    public void setScore(int mScore) {
-        this.mScore = mScore;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
