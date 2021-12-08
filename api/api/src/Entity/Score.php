@@ -9,24 +9,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
 #[ApiResource(
-    normalizationContext: ["groups" => ["user:read"]],
-    denormalizationContext: ["groups" => ["user:write"]],
     order: ["score" => "DESC"]
 )]
 class Score
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
     private $id;
 
     #[ORM\Column(type: 'smallint')]
-    #[Groups(["user:read","user:write"])]
     private $score;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(["user:read","user:write"])]
     private $byUser;
 
     public function getId(): ?int

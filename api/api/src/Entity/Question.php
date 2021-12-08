@@ -8,10 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
-#[ApiResource(
-    normalizationContext: ["groups" => ["user:read"]],
-    denormalizationContext: ["groups" => ["user:write"]],
-)]
+#[ApiResource]
 class Question
 {
     #[ORM\Id]
@@ -20,27 +17,21 @@ class Question
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["user:read","user:write"])]
     private $content;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["user:read","user:write"])]
     private $answer1;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["user:read","user:write"])]
     private $answer2;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["user:read","user:write"])]
     private $answer3;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["user:read","user:write"])]
     private $answer4;
 
     #[ORM\Column(type: 'smallint')]
-    #[Groups(["user:read","user:write"])]
     private $answerIndex;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'createdQuestions')]
