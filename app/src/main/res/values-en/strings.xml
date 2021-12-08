@@ -45,4 +45,6 @@
     <string name="field_required_error">This Field is mandatory</string>
     <string name="user_created">The user has been created</string>
     <string name="user_created_error">The user can\'t be created, the username must already be set</string>
+    <string name="connection_error">The connection failed</string>
+    <string name="connection_success">The connection succeed</string>
 </resources>

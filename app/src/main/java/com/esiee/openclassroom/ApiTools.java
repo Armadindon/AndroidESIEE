@@ -108,6 +108,28 @@ public class ApiTools {
         return users;
     }
 
+    public static User getUserByUsername(String token, String username){
+        String baseUrl = BuildConfig.API_URL;
+        String usersString = "";
+        try {
+            usersString = getJSONObjectFromURL(baseUrl + "users?username="+username, token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        User[] users = null;
+        try{
+            users = mapper.readValue(usersString, User[].class);
+            if(users.length == 0) return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return users[0];
+    }
+
     public static String authenticate(String user, String password){
         String baseUrl = BuildConfig.API_URL;
         String token = "";
