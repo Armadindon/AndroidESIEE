@@ -29,7 +29,7 @@ public class SignUp extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String token = ApiTools.getToken();
+                String token = ApiTools.authenticate("vinc", "changeme");
                 System.out.println(token);
                 User[] users = ApiTools.getAllUsers(token);
                 for (User user : users) System.out.println(user.getUsername());
@@ -43,6 +43,29 @@ public class SignUp extends AppCompatActivity {
         mPasswordEditText = findViewById(R.id.signup_edittext_password);
         mSignUpButton = findViewById(R.id.signup_button_signup);
         mSignUpLink = findViewById(R.id.signup_link_connection);
+
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //On crée le user avec les données
+                User u = new User();
+                u.setFirstname(mFirstnameEditText.getText().toString());
+                u.setLastname(mLastnameEditText.getText().toString());
+                u.setUsername(mLoginEditText.getText().toString());
+                u.setPassword(mPasswordEditText.getText().toString());
+
+                Thread thread = new Thread(() -> {
+                    User newUser = ApiTools.registerUser(u);
+                    System.out.println("Nouveau Utilisateur");
+                    System.out.println(newUser);
+                    if(newUser != null){
+                        Intent connectionIntent = new Intent(v.getContext(), Connection.class);
+                        startActivityForResult(connectionIntent, 0);
+                    }
+                });
+                thread.start();
+            }
+        });
 
         mSignUpLink.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,6 @@ package com.esiee.openclassroom;
 import com.esiee.openclassroom.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +17,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class ApiTools {
 
-    static String user = "{\"username\": \"vinc\",\"password\": \"changeme\" }";
     // Make a GET Request
     public static String getJSONObjectFromURL(String urlString, String token) throws IOException, JSONException {
         HttpsURLConnection urlConnection = null;
@@ -48,12 +46,15 @@ public class ApiTools {
     }
 
     // Make a POST Request
-    public static String postJSONObjectToURL(String urlString) throws IOException, JSONException {
+    public static String postJSONObjectToURL(String urlString, String token, String body) throws IOException, JSONException {
         HttpsURLConnection urlConnection = null;
         URL url = new URL(urlString);
         urlConnection = (HttpsURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
         urlConnection.setRequestProperty("Accept","application/json");
+        if(token != null){
+            urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+        }
         urlConnection.setRequestProperty("Content-Type","application/json");
         urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
         urlConnection.setReadTimeout(10000 /* milliseconds */ );
@@ -62,13 +63,14 @@ public class ApiTools {
         urlConnection.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream (
                 urlConnection.getOutputStream());
-        wr.writeBytes(user);
+        wr.writeBytes(body);
         wr.close();
         urlConnection.connect();
 
         String jsonString = "";
 
-        if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+        //On vérifie le code comme ça pour prendre en compte les codes 201, etc.
+        if (("" + urlConnection.getResponseCode()).startsWith("20")) {
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
@@ -78,7 +80,12 @@ public class ApiTools {
             br.close();
             jsonString = sb.toString();
         }
+
         return jsonString;
+    }
+
+    public static String postJSONObjectToURL(String urlString, String body) throws IOException, JSONException {
+        return  postJSONObjectToURL(urlString, null, body);
     }
 
     public static User[] getAllUsers(String token){
@@ -101,11 +108,16 @@ public class ApiTools {
         return users;
     }
 
-    public static String getToken(){
+    public static String authenticate(String user, String password){
         String baseUrl = BuildConfig.API_URL;
         String token = "";
+
         try {
-            String userToken = postJSONObjectToURL(baseUrl + "authentication_token");
+            JSONObject json = new JSONObject();
+            json.put("username", user);
+            json.put("password", password);
+
+            String userToken = postJSONObjectToURL(baseUrl + "authentication_token", json.toString());
             JSONObject tokenObject = new JSONObject(userToken);
             token = tokenObject.getString("token");
         } catch (IOException e) {
@@ -114,6 +126,26 @@ public class ApiTools {
             e.printStackTrace();
         }
         return token;
+    }
+
+    public static User registerUser(User u){
+        String baseUrl = BuildConfig.API_URL;
+        User newUser = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String userJson = o.writeValueAsString(u);
+
+            String createdUser = postJSONObjectToURL(baseUrl + "users", userJson);
+            //On map l'user
+            System.out.println(createdUser);
+            newUser = o.readValue(createdUser, User.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newUser;
     }
 
 
