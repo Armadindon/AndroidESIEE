@@ -1,5 +1,7 @@
 package com.esiee.openclassroom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class Score implements Serializable {
@@ -31,6 +33,7 @@ public class Score implements Serializable {
         this.user = user;
     }
 
+    @JsonIgnore
     public int getId() {
         return id;
     }

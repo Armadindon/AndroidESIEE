@@ -1,5 +1,7 @@
 package com.esiee.openclassroom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class Question implements Serializable {
@@ -92,6 +94,7 @@ public class Question implements Serializable {
         this.creator = creator;
     }
 
+    @JsonIgnore
     public int getId() {
         return id;
     }

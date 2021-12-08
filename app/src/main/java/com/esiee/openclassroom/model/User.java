@@ -1,5 +1,8 @@
 package com.esiee.openclassroom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -52,6 +55,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @JsonIgnore
     public int getId() {
         return id;
     }
