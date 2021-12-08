@@ -1,41 +1,39 @@
 package com.esiee.openclassroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.esiee.openclassroom.model.User;
 
 public class SignUp extends AppCompatActivity {
 
+    // Message type code.
+    private final static int ENABLE_FIELDS = 1;
     private EditText mLoginEditText;
     private EditText mFirstnameEditText;
     private EditText mLastnameEditText;
     private EditText mPasswordEditText;
     private Button mSignUpButton;
     private TextView mSignUpLink;
+    private Handler UIHandler; //Permet de changer les vues depuis un thread
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-
-        //TEST
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String token = ApiTools.authenticate("vinc", "changeme");
-                System.out.println(token);
-                User[] users = ApiTools.getAllUsers(token);
-                for (User user : users) System.out.println(user.getUsername());
-            }
-        });
-        thread.start();
+        createUpdateUiHandler();
 
         mLoginEditText = findViewById(R.id.signup_edittext_login);
         mFirstnameEditText = findViewById(R.id.signup_edittext_firstname);
@@ -44,9 +42,25 @@ public class SignUp extends AppCompatActivity {
         mSignUpButton = findViewById(R.id.signup_button_signup);
         mSignUpLink = findViewById(R.id.signup_link_connection);
 
+
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //On vérifie que toutes les données sont renseignées
+                boolean fullInformations = true;
+                TextView[] fieldsToCheck = {mLoginEditText, mFirstnameEditText, mLastnameEditText, mPasswordEditText};
+                for (TextView textView : fieldsToCheck) {
+                    if (TextUtils.isEmpty(textView.getText())) {
+                        fullInformations = false;
+                        textView.setError(getString(R.string.field_required_error));
+                    }
+                }
+                if (!fullInformations) return;
+
+                //On bloque les champs le temps que l'utilisateur soit enregistrés
+                switchEnabledFields(false);
+
                 //On crée le user avec les données
                 User u = new User();
                 u.setFirstname(mFirstnameEditText.getText().toString());
@@ -56,11 +70,21 @@ public class SignUp extends AppCompatActivity {
 
                 Thread thread = new Thread(() -> {
                     User newUser = ApiTools.registerUser(u);
-                    System.out.println("Nouveau Utilisateur");
-                    System.out.println(newUser);
-                    if(newUser != null){
-                        Intent connectionIntent = new Intent(v.getContext(), Connection.class);
-                        startActivityForResult(connectionIntent, 0);
+
+                    //On envoie un message au handler pour qu'il réactive les champs
+                    Message m = new Message();
+                    m.what = ENABLE_FIELDS;
+                    UIHandler.sendMessage(m);
+
+                    //On agit en fonction de la réponse
+                    Looper.prepare();
+                    if (newUser != null) {
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created), Toast.LENGTH_LONG);
+                        toast.show();
+                        goToLoginPanel(v.getContext());
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created_error), Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 });
                 thread.start();
@@ -70,9 +94,35 @@ public class SignUp extends AppCompatActivity {
         mSignUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent connectionIntent = new Intent(v.getContext(), Connection.class);
-                startActivityForResult(connectionIntent, 0);
+                goToLoginPanel(v.getContext());
             }
         });
+    }
+
+    private void goToLoginPanel(Context c) {
+        Intent connectionIntent = new Intent(c, Connection.class);
+        startActivityForResult(connectionIntent, 0);
+    }
+
+    private void switchEnabledFields(boolean enabled) {
+        TextView[] fieldsToCheck = {mLoginEditText, mFirstnameEditText, mLastnameEditText, mPasswordEditText};
+        for (TextView textView : fieldsToCheck) textView.setEnabled(enabled);
+        mSignUpButton.setEnabled(enabled);
+    }
+
+    private void createUpdateUiHandler() {
+        //Permet de creer un handler
+        if (UIHandler == null) {
+            UIHandler = new Handler(new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    // Means the message is sent from child thread.
+                    if (msg.what == ENABLE_FIELDS) {
+                        switchEnabledFields(true);
+                    }
+                    return true;
+                }
+            });
+        }
     }
 }

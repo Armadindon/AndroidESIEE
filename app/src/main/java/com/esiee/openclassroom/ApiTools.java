@@ -134,7 +134,7 @@ public class ApiTools {
         try {
             ObjectMapper o = new ObjectMapper();
             String userJson = o.writeValueAsString(u);
-
+            System.out.println(userJson);
             String createdUser = postJSONObjectToURL(baseUrl + "users", userJson);
             //On map l'user
             System.out.println(createdUser);
