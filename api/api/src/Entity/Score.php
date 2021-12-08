@@ -15,6 +15,7 @@ class Score
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
     #[ORM\Column(type: 'smallint')]
