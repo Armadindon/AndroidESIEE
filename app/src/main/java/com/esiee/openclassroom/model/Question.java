@@ -1,13 +1,14 @@
 package com.esiee.openclassroom.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Question implements Serializable {
 
+    private int id;
     private String content;
     private String answer1;
     private String answer2;
+
     private String answer3;
     private String answer4;
     private int answerIndex;
@@ -89,5 +90,23 @@ public class Question implements Serializable {
 
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", answer1='" + answer1 + '\'' +
+                ", answer2='" + answer2 + '\'' +
+                ", answer3='" + answer3 + '\'' +
+                ", answer4='" + answer4 + '\'' +
+                ", answerIndex=" + answerIndex +
+                ", creator=" + creator +
+                '}';
     }
 }
