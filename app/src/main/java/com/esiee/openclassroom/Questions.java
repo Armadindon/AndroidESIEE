@@ -210,6 +210,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                 } else {
                     // Plus de questions; le jeu est finito
                     //TODO : score utilisateur à modifier/créer
+                    //mUser.setScore(mUser.getScore() + mScore);
                     builder.setTitle(getString(R.string.finish_alert_title))
                             .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
                             .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {

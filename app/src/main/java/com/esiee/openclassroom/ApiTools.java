@@ -1,6 +1,7 @@
 package com.esiee.openclassroom;
 
 import com.esiee.openclassroom.model.User;
+import com.esiee.openclassroom.model.Question;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
@@ -170,5 +171,23 @@ public class ApiTools {
         return newUser;
     }
 
+    public static Question createQuestion(Question q){
+        String baseUrl = BuildConfig.API_URL;
+        Question newQuestion = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String questionJson = o.writeValueAsString(q);
+            System.out.println(questionJson);
+            String createdQuestion = postJSONObjectToURL(baseUrl + "questions", questionJson);
+            //On map la question
+            System.out.println(createdQuestion);
+            newQuestion = o.readValue(createdQuestion, Question.class);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newQuestion;
+    }
 }
