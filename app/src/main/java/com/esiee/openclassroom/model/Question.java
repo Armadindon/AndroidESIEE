@@ -1,9 +1,12 @@
 package com.esiee.openclassroom.model;
 
+import com.esiee.openclassroom.model.serializer.QuestionSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
+@JsonSerialize(using = QuestionSerializer.class)
 public class Question implements Serializable {
 
     private int id;

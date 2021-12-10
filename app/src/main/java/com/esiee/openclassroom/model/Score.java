@@ -1,9 +1,12 @@
 package com.esiee.openclassroom.model;
 
+import com.esiee.openclassroom.model.serializer.ScoreSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
+@JsonSerialize(using = ScoreSerializer.class)
 public class Score implements Serializable {
     private int id;
     private int score;
