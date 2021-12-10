@@ -37,8 +37,10 @@ public class Menu extends AppCompatActivity {
         mQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent connectionIntent = new Intent(v.getContext(), Questions.class);
-                startActivityForResult(connectionIntent, 0);
+                Intent questionIntent = new Intent(v.getContext(), Questions.class);
+                questionIntent.putExtra(INTENT_TOKEN, token);
+                questionIntent.putExtra(INTENT_USER, user);
+                startActivityForResult(questionIntent, 0);
             }
         });
 

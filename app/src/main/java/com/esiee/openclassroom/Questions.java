@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -72,17 +73,22 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             mRemainingQuestionCount = savedInstanceState.getInt(BUNDLE_STATE_REMAINING_QUESTION);
             mQuestionBank = (QuestionBank) savedInstanceState.getSerializable(BUNDLE_STATE_QUESTION);
             mCurrentQuestion = mQuestionBank.getCurrentQuestion();
+            displayQuestion(mCurrentQuestion);
         } else {
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            mUser = (User) bundle.getSerializable(BUNDLE_USER);
+            mUser = (User) intent.getExtras().getSerializable(Menu.INTENT_USER);
             mScore = new Score(0, mUser);
             mRemainingQuestionCount = 4;
-            mQuestionBank = generateQuestionBank();
-            mCurrentQuestion = mQuestionBank.getNextQuestion();
+            Thread t = new Thread(()->{
+                mQuestionBank = generateQuestionBank();
+                mCurrentQuestion = mQuestionBank.getNextQuestion();
+                displayQuestion(mCurrentQuestion);
+            });
+            t.start();
+
         }
         System.out.println(mQuestionBank);
-        displayQuestion(mCurrentQuestion);
         freezeScreen = false;
 
         mReturn.setOnClickListener(new View.OnClickListener() {
@@ -107,59 +113,18 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     }
 
     private QuestionBank generateQuestionBank() {
-        //On initialise le modèle
-        com.esiee.openclassroom.model.Question question1 = new com.esiee.openclassroom.model.Question(
-                getString(R.string.question_1),
-                getString(R.string.question_1_answer_1),
-                getString(R.string.question_1_answer_2),
-                getString(R.string.question_1_answer_3),
-                getString(R.string.question_1_answer_4),
-                0
-        );
+        //On récupère de l'API
+        Thread t;
+        Question[] q = ApiTools.getQuestions(ApiTools.token);
 
-        com.esiee.openclassroom.model.Question question2 = new com.esiee.openclassroom.model.Question(
-                getString(R.string.question_2),
-                getString(R.string.question_2_answer_1),
-                getString(R.string.question_2_answer_2),
-                getString(R.string.question_2_answer_3),
-                getString(R.string.question_2_answer_4),
-                3
-        );
 
-        com.esiee.openclassroom.model.Question question3 = new com.esiee.openclassroom.model.Question(
-                getString(R.string.question_3),
-                getString(R.string.question_3_answer_1),
-                getString(R.string.question_3_answer_2),
-                getString(R.string.question_3_answer_3),
-                getString(R.string.question_3_answer_4),
-                3
-        );
-
-        com.esiee.openclassroom.model.Question question4 = new com.esiee.openclassroom.model.Question(
-                getString(R.string.question_4),
-                getString(R.string.question_4_answer_1),
-                getString(R.string.question_4_answer_2),
-                getString(R.string.question_4_answer_3),
-                getString(R.string.question_4_answer_4),
-                0
-        );
-
-        com.esiee.openclassroom.model.Question question5 = new com.esiee.openclassroom.model.Question(
-                getString(R.string.question_5),
-                getString(R.string.question_5_answer_1),
-                getString(R.string.question_5_answer_2),
-                getString(R.string.question_5_answer_3),
-                getString(R.string.question_5_answer_4),
-                1
-        );
-
-        return new QuestionBank(Arrays.asList(question1, question2, question3, question4, question5));
+        return new QuestionBank(Arrays.asList(q));
     }
 
-    private void displayQuestion(final com.esiee.openclassroom.model.Question question) {
+    private void displayQuestion(Question question) {
         // Set the text for the question text view and the four buttons
         mCurrentQuestion = question;
-
+        System.out.println(question);
         mQuestionTitle.setText(question.getContent());
         mAnswer1.setText(question.getAnswer1());
         mAnswer2.setText(question.getAnswer2());
@@ -209,23 +174,29 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                     displayQuestion(mCurrentQuestion);
                 } else {
                     // Plus de questions; le jeu est finito
-                    //TODO : score utilisateur à modifier/créer
-                    //mUser.setScore(mUser.getScore() + mScore);
-                    builder.setTitle(getString(R.string.finish_alert_title))
-                            .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
-                            .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent();
-                                    intent.putExtra(BUNDLE_USER, mUser);
-                                    intent.putExtra(BUNDLE_SCORE, mScore);
-                                    setResult(RESULT_OK, intent);
-                                    finish();
-                                    finish();
-                                }
-                            })
-                            .create()
-                            .show();
+                    //On enregistre le score en bdd via l'api
+                    Thread t = new Thread(()->{
+                        Looper.prepare();
+                        Score score = ApiTools.postScore(mScore, ApiTools.token);
+                        builder.setTitle(getString(R.string.finish_alert_title))
+                                .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
+                                .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra(BUNDLE_USER, mUser);
+                                        intent.putExtra(BUNDLE_SCORE, mScore);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                        finish();
+                                    }
+                                })
+                                .create()
+                                .show();
+                    });
+
+                    t.start();
+
                 }
             }
         }, 2_000); // LENGTH_SHORT is usually 2 second long

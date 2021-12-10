@@ -52,6 +52,7 @@ public class ApiTools {
 
     // Make a POST Request
     public static String postJSONObjectToURL(String urlString, String token, String body) throws IOException, JSONException {
+        System.out.println(body);
         HttpsURLConnection urlConnection = null;
         URL url = new URL(urlString);
         urlConnection = (HttpsURLConnection) url.openConnection();
@@ -75,6 +76,7 @@ public class ApiTools {
         String jsonString = "";
 
         //On vérifie le code comme ça pour prendre en compte les codes 201, etc.
+        System.out.println(urlConnection.getResponseCode());
         if (("" + urlConnection.getResponseCode()).startsWith("20")) {
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder sb = new StringBuilder();
@@ -84,6 +86,7 @@ public class ApiTools {
             }
             br.close();
             jsonString = sb.toString();
+            System.out.println(jsonString);
         }
 
         return jsonString;
@@ -217,5 +220,48 @@ public class ApiTools {
         }
         System.out.println(Arrays.toString(scores));
         return scores;
+    }
+
+    public static Question[] getQuestions(String token){
+        String baseUrl = BuildConfig.API_URL;
+        String scoreString = "";
+        try {
+            scoreString = getJSONObjectFromURL(baseUrl + "questions", token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        Question[] questions = null;
+        try{
+            questions = mapper.readValue(scoreString, Question[].class);
+            if(questions.length == 0) return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return questions;
+    }
+
+    public static Score postScore(Score s, String token){
+        String baseUrl = BuildConfig.API_URL;
+        Score newScore = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String scoreJson = o.writeValueAsString(s);
+            System.out.println(scoreJson);
+            String createdScore = postJSONObjectToURL(baseUrl + "scores",token, scoreJson);
+
+            //On map la question
+            System.out.println(createdScore);
+            newScore = o.readValue(createdScore, Score.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newScore;
     }
 }
