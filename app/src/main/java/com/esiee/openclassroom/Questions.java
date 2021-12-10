@@ -1,20 +1,9 @@
 package com.esiee.openclassroom;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.esiee.openclassroom.model.Score;
-import com.esiee.openclassroom.BuildConfig;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,9 +11,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.QuestionBank;
+import com.esiee.openclassroom.model.Score;
 import com.esiee.openclassroom.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -83,10 +80,10 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
         } else {
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            mUser = (User) intent.getExtras().getSerializable(Menu.INTENT_USER);
+            mUser = (User) DataManager.getInstance().getUser();
             mScore = new Score(0, mUser);
             mRemainingQuestionCount = 4;
-            Thread t = new Thread(()->{
+            Thread t = new Thread(() -> {
                 mQuestionBank = generateQuestionBank();
                 mCurrentQuestion = mQuestionBank.getNextQuestion();
                 displayQuestion(mCurrentQuestion);
@@ -101,17 +98,17 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(Questions.this)
-                    .setTitle("Retour à l'accueil")
-                    .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
-                            startActivityForResult(signUpIntent, 0);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                        .setTitle("Retour à l'accueil")
+                        .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
+                                startActivityForResult(signUpIntent, 0);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 
@@ -121,7 +118,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private QuestionBank generateQuestionBank() {
         //On récupère de l'API
         Thread t;
-        Question[] q = ApiTools.getQuestions(ApiTools.token);
+        Question[] q = getQuestions(DataManager.getInstance().getToken());
 
 
         return new QuestionBank(Arrays.asList(q));
@@ -181,8 +178,8 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                 } else {
                     // Plus de questions; le jeu est finito
                     //On enregistre le score en bdd via l'api
-                    Thread t = new Thread(()->{
-                        Score score = ApiTools.postScore(mScore, ApiTools.token);
+                    Thread t = new Thread(() -> {
+                        Score score = postScore(mScore, DataManager.getInstance().getToken());
                         Message m = new Message();
                         m.what = FINISH_ACTIVITY;
                         handler.sendMessage(m);
@@ -236,4 +233,48 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             });
         }
 
-}}
+    }
+
+    public static Score postScore(Score s, String token){
+        String baseUrl = BuildConfig.API_URL;
+        Score newScore = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String scoreJson = o.writeValueAsString(s);
+            System.out.println(scoreJson);
+            String createdScore = ApiTools.postJSONObjectToURL(baseUrl + "scores",token, scoreJson);
+
+            //On map la question
+            System.out.println(createdScore);
+            newScore = o.readValue(createdScore, Score.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newScore;
+    }
+
+    public static Question[] getQuestions(String token){
+        String baseUrl = BuildConfig.API_URL;
+        String scoreString = "";
+        try {
+            scoreString = ApiTools.getJSONObjectFromURL(baseUrl + "questions", token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        Question[] questions = null;
+        try{
+            questions = mapper.readValue(scoreString, Question[].class);
+            if(questions.length == 0) return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return questions;
+    }
+}

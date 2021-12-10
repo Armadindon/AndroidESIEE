@@ -2,6 +2,7 @@ package com.esiee.openclassroom.model.deserializer;
 
 import com.esiee.openclassroom.ApiTools;
 import com.esiee.openclassroom.BuildConfig;
+import com.esiee.openclassroom.DataManager;
 import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.User;
 import com.fasterxml.jackson.core.JacksonException;
@@ -38,7 +39,7 @@ public class QuestionDeserializer extends StdDeserializer<Question> {
         String creatorURI = node.get("creator").asText();
         User creator = null;
         try {
-            String creatorJSON = ApiTools.getJSONObjectFromURL(baseUrl+creatorURI.substring(1), ApiTools.token);
+            String creatorJSON = ApiTools.getJSONObjectFromURL(baseUrl+creatorURI.substring(1), DataManager.getInstance().getToken());
             ObjectMapper ob = new ObjectMapper();
             creator = ob.readValue(creatorJSON, User.class);
         } catch (JSONException e) {

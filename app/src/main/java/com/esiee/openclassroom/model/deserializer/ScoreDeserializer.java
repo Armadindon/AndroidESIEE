@@ -2,6 +2,7 @@ package com.esiee.openclassroom.model.deserializer;
 
 import com.esiee.openclassroom.ApiTools;
 import com.esiee.openclassroom.BuildConfig;
+import com.esiee.openclassroom.DataManager;
 import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.Score;
 import com.esiee.openclassroom.model.User;
@@ -37,7 +38,7 @@ public class ScoreDeserializer extends StdDeserializer<Score> {
         System.out.println("Deserialization user");
         User user = null;
         try {
-            String userJSON = ApiTools.getJSONObjectFromURL(baseUrl+userURI.substring(1), ApiTools.token);
+            String userJSON = ApiTools.getJSONObjectFromURL(baseUrl+userURI.substring(1), DataManager.getInstance().getToken());
             ObjectMapper ob = new ObjectMapper();
             user = ob.readValue(userJSON, User.class);
         } catch (JSONException e) {

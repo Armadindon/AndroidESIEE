@@ -21,10 +21,13 @@ import android.widget.Toast;
 
 import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class QuestionCreation extends AppCompatActivity {
-    public static final String INTENT_TOKEN = "token";
-    public static final String INTENT_USER = "user";
     private final static int ENABLE_FIELDS = 1;
     private TextView mQuestionEditText;
     private EditText mAnswer1EditText;
@@ -40,18 +43,12 @@ public class QuestionCreation extends AppCompatActivity {
     private Button mSubmitButton;
 
     private Handler UIHandler;
-    private String token;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_creation);
         createUpdateUiHandler();
-
-        Intent intent = getIntent();
-        user = (User) intent.getExtras().get(Connection.INTENT_USER);
-        token = intent.getExtras().getString(Connection.INTENT_TOKEN);
 
         mQuestionEditText = findViewById(R.id.question_creation_edittext_question);
         mAnswer1EditText = findViewById(R.id.question_creation_edittext_answer1);
@@ -113,10 +110,10 @@ public class QuestionCreation extends AppCompatActivity {
                 q.setAnswer3(mAnswer3EditText.getText().toString());
                 q.setAnswer4(mAnswer4EditText.getText().toString());
                 q.setAnswerIndex(Integer.parseInt( rb.getText().toString() ));
-                q.setCreator(user);
+                q.setCreator(DataManager.getInstance().getUser());
 
                 Thread thread = new Thread(() -> {
-                    Question newQuestion = ApiTools.createQuestion(q, token);
+                    Question newQuestion = createQuestion(q, DataManager.getInstance().getToken());
 
                     //On envoie un message au handler pour qu'il réactive les champs
                     Message m = new Message();
@@ -158,8 +155,6 @@ public class QuestionCreation extends AppCompatActivity {
 
     private void goToMenuPanel(Context c) {
         Intent menuIntent = new Intent(c, Menu.class);
-        menuIntent.putExtra(INTENT_TOKEN, token);
-        menuIntent.putExtra(INTENT_USER, user);
         startActivityForResult(menuIntent, 0);
     }
 
@@ -167,5 +162,25 @@ public class QuestionCreation extends AppCompatActivity {
         TextView[] fieldsToCheck = {mQuestionEditText, mAnswer1EditText, mAnswer2EditText, mAnswer3EditText, mAnswer4EditText};
         for (TextView textView : fieldsToCheck) textView.setEnabled(enabled);
         mSubmitButton.setEnabled(enabled);
+    }
+
+    public static Question createQuestion(Question q, String token){
+        String baseUrl = BuildConfig.API_URL;
+        Question newQuestion = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String questionJson = o.writeValueAsString(q);
+            System.out.println(questionJson);
+            String createdQuestion = ApiTools.postJSONObjectToURL(baseUrl + "questions",token, questionJson);
+            //On map la question
+            System.out.println(createdQuestion);
+            newQuestion = o.readValue(createdQuestion, Question.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newQuestion;
     }
 }

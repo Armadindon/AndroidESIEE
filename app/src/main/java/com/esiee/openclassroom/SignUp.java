@@ -16,6 +16,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.esiee.openclassroom.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class SignUp extends AppCompatActivity {
 
@@ -69,7 +74,7 @@ public class SignUp extends AppCompatActivity {
                 u.setPassword(mPasswordEditText.getText().toString());
 
                 Thread thread = new Thread(() -> {
-                    User newUser = ApiTools.registerUser(u);
+                    User newUser = registerUser(u);
 
                     //On envoie un message au handler pour qu'il réactive les champs
                     Message m = new Message();
@@ -124,5 +129,25 @@ public class SignUp extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public static User registerUser(User u){
+        String baseUrl = BuildConfig.API_URL;
+        User newUser = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String userJson = o.writeValueAsString(u);
+            System.out.println(userJson);
+            String createdUser = ApiTools.postJSONObjectToURL(baseUrl + "users", userJson);
+            //On map l'user
+            System.out.println(createdUser);
+            newUser = o.readValue(createdUser, User.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newUser;
     }
 }

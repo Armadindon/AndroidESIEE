@@ -16,12 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esiee.openclassroom.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class Connection extends AppCompatActivity {
 
     private static final int ENABLE_FIELDS = 1;
-    public static final String INTENT_TOKEN = "token";
-    public static final String INTENT_USER = "user";
 
     private EditText mLoginEditText;
     private EditText mPasswordEditText;
@@ -62,7 +66,7 @@ public class Connection extends AppCompatActivity {
 
 
                 Thread thread = new Thread(() -> {
-                    String token = ApiTools.authenticate(mLoginEditText.getText().toString(), mPasswordEditText.getText().toString());
+                    String token = authenticate(mLoginEditText.getText().toString(), mPasswordEditText.getText().toString());
 
                     //On envoie un message au handler pour qu'il réactive les champs
                     Message m = new Message();
@@ -72,8 +76,8 @@ public class Connection extends AppCompatActivity {
                     //On agit en fonction de la réponse
                     Looper.prepare();
                     if (!token.isEmpty()) {
-                        User user = ApiTools.getUserByUsername(token, mLoginEditText.getText().toString());
-                        System.out.println(user);
+                        User user = getUserByUsername(token, mLoginEditText.getText().toString());
+                        DataManager.getInstance().setUser(user);
                         Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.connection_success), Toast.LENGTH_LONG);
                         toast.show();
                         goToNextPanel(v.getContext(), token, user);
@@ -98,8 +102,6 @@ public class Connection extends AppCompatActivity {
 
     private void goToNextPanel(Context c, String token, User u) {
         Intent menuIntent = new Intent(c, Menu.class);
-        menuIntent.putExtra(INTENT_TOKEN, token);
-        menuIntent.putExtra(INTENT_USER, u);
         startActivityForResult(menuIntent, 0);
     }
 
@@ -123,5 +125,48 @@ public class Connection extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public static String authenticate(String user, String password){
+        String baseUrl = BuildConfig.API_URL;
+        String token = "";
+
+        try {
+            JSONObject json = new JSONObject();
+            json.put("username", user);
+            json.put("password", password);
+
+            String userToken = ApiTools.postJSONObjectToURL(baseUrl + "authentication_token", json.toString());
+            JSONObject tokenObject = new JSONObject(userToken);
+            token = tokenObject.getString("token");
+            DataManager.getInstance().setToken(token); //Degueu, mais pas de solution autre pour le moment
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return token;
+    }
+
+    public static User getUserByUsername(String token, String username){
+        String baseUrl = BuildConfig.API_URL;
+        String usersString = "";
+        try {
+            usersString = ApiTools.getJSONObjectFromURL(baseUrl + "users?username="+username, token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        User[] users = null;
+        try{
+            users = mapper.readValue(usersString, User[].class);
+            if(users.length == 0) return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return users[0];
     }
 }
