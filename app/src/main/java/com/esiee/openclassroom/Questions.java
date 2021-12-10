@@ -9,11 +9,13 @@ import com.esiee.openclassroom.BuildConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +37,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private static final String BUNDLE_USER = "BUNDLE_USER";
     private static final String BUNDLE_SCORE = "BUNDLE_SCORE";
     private static final String BUNDLE_STATE_USER = "BUNDLE_STATE_USER";
+    private static final int FINISH_ACTIVITY = 1;
 
     private QuestionBank mQuestionBank;
     private com.esiee.openclassroom.model.Question mCurrentQuestion;
@@ -42,6 +45,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private Score mScore;
     private User mUser;
     private boolean freezeScreen;
+    private Handler handler;
 
     private TextView mQuestionTitle;
     private Button mAnswer1;
@@ -66,6 +70,8 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
         mAnswer2.setOnClickListener(this);
         mAnswer3.setOnClickListener(this);
         mAnswer4.setOnClickListener(this);
+
+        createUpdateHandler();
 
         if (savedInstanceState != null) {
             mUser = (User) savedInstanceState.getSerializable(BUNDLE_STATE_USER);
@@ -176,23 +182,10 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                     // Plus de questions; le jeu est finito
                     //On enregistre le score en bdd via l'api
                     Thread t = new Thread(()->{
-                        Looper.prepare();
                         Score score = ApiTools.postScore(mScore, ApiTools.token);
-                        builder.setTitle(getString(R.string.finish_alert_title))
-                                .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
-                                .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra(BUNDLE_USER, mUser);
-                                        intent.putExtra(BUNDLE_SCORE, mScore);
-                                        setResult(RESULT_OK, intent);
-                                        finish();
-                                        finish();
-                                    }
-                                })
-                                .create()
-                                .show();
+                        Message m = new Message();
+                        m.what = FINISH_ACTIVITY;
+                        handler.sendMessage(m);
                     });
 
                     t.start();
@@ -212,4 +205,35 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
         outState.putSerializable(BUNDLE_STATE_USER, mUser);
     }
 
-}
+    private void createUpdateHandler() {
+        //Permet de creer un handler
+        if (handler == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            handler = new Handler(new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    // Means the message is sent from child thread.
+                    if (msg.what == FINISH_ACTIVITY) {
+                        builder.setTitle(getString(R.string.finish_alert_title))
+                                .setMessage(getString(R.string.finish_final_score) + mScore.getScore())
+                                .setPositiveButton(getString(R.string.finish_final_button), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra(BUNDLE_USER, mUser);
+                                        intent.putExtra(BUNDLE_SCORE, mScore);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                })
+                                .create()
+                                .show();
+
+                    }
+                    return true;
+                }
+            });
+        }
+
+}}

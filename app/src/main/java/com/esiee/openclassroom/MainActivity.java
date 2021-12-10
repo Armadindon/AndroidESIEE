@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mUser.setFirstname(mNameEditText.getText().toString());
-                mScore.setUser(mUser);
+                mScore.setByUser(mUser);
                 mScore.setScore(0);
                 Intent gameActivityIntent = new Intent(MainActivity.this, Questions.class);
                 gameActivityIntent.putExtra(BUNDLE_USER, mUser);

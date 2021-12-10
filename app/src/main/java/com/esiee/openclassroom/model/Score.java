@@ -13,14 +13,14 @@ import java.io.Serializable;
 public class Score implements Serializable {
     private int id;
     private int score;
-    private User user;
+    private User byUser;
 
     public Score() {
     }
 
     public Score(int score, User user) {
         this.score = score;
-        this.user = user;
+        this.byUser = user;
     }
 
     public int getScore() {
@@ -31,12 +31,12 @@ public class Score implements Serializable {
         this.score = score;
     }
 
-    public User getUser() {
-        return user;
+    public User getByUser() {
+        return byUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setByUser(User byUser) {
+        this.byUser = byUser;
     }
 
     @JsonIgnore
@@ -49,7 +49,7 @@ public class Score implements Serializable {
         return "Score{" +
                 "id=" + id +
                 ", score=" + score +
-                ", user=" + user +
+                ", user=" + byUser +
                 '}';
     }
 

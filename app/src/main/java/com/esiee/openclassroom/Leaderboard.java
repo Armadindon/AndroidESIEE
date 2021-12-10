@@ -3,13 +3,9 @@ package com.esiee.openclassroom;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Looper;
-import android.os.Message;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.esiee.openclassroom.model.Score;
-import com.esiee.openclassroom.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +38,7 @@ public class Leaderboard extends AppCompatActivity {
             int index = 0;
             for (Score score: scores) {
                 int current = index++;
-                ranks.get(current).setText(score.getUser().getUsername() + " - " + score.getScore());
+                ranks.get(current).setText(score.getByUser().getUsername() + " - " + score.getScore());
             }
         });
         thread.start();
