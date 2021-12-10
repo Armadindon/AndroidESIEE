@@ -34,13 +34,13 @@ public class Menu extends AppCompatActivity {
         mLeaderboardButton = findViewById(R.id.menu_button_leaderboard);
         mQuestionCreationButton = findViewById(R.id.menu_button_questioncreation);
 
-        /*mQuizButton.setOnClickListener(new View.OnClickListener() {
+        mQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent connectionIntent = new Intent(v.getContext(), Connection.class);
+                Intent connectionIntent = new Intent(v.getContext(), Questions.class);
                 startActivityForResult(connectionIntent, 0);
             }
-        });*/
+        });
 
         mLeaderboardButton.setOnClickListener(new View.OnClickListener() {
             @Override

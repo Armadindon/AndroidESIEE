@@ -17,7 +17,7 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".Connection"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +33,7 @@
             android:name=".QuestionCreation"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Connection"
+            android:name=".SignUp"
             android:exported="false" />
 
         <meta-data

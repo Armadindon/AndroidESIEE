@@ -21,6 +21,7 @@
     <Button
         android:id="@+id/menu_button_quiz"
         style="@style/Buttons"
+        android:background="@drawable/gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -30,11 +31,12 @@
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_title"
-        tools:text="@string/menu_button_quiz" />
+        android:text="@string/menu_button_quiz" />
 
     <Button
         android:id="@+id/menu_button_leaderboard"
         style="@style/Buttons"
+        android:background="@drawable/gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -44,11 +46,12 @@
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button_quiz"
-        tools:text="@string/menu_button_leaderboard" />
+        android:text="@string/menu_button_leaderboard" />
 
     <Button
         android:id="@+id/menu_button_questioncreation"
         style="@style/Buttons"
+        android:background="@drawable/gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -58,6 +61,6 @@
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button_leaderboard"
-        tools:text="@string/menu_button_questioncreation" />
+        android:text="@string/menu_button_questioncreation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
