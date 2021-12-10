@@ -1,5 +1,6 @@
 package com.esiee.openclassroom;
 
+import com.esiee.openclassroom.model.Score;
 import com.esiee.openclassroom.model.User;
 import com.esiee.openclassroom.model.Question;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,10 +14,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class ApiTools {
+
+    public static String token = "";
 
     // Make a GET Request
     public static String getJSONObjectFromURL(String urlString, String token) throws IOException, JSONException {
@@ -143,6 +147,7 @@ public class ApiTools {
             String userToken = postJSONObjectToURL(baseUrl + "authentication_token", json.toString());
             JSONObject tokenObject = new JSONObject(userToken);
             token = tokenObject.getString("token");
+            ApiTools.token = token; //Degueu, mais pas de solution autre pour le moment
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -189,5 +194,28 @@ public class ApiTools {
             e.printStackTrace();
         }
         return newQuestion;
+    }
+
+    public static Score[] getScores(String token){
+        String baseUrl = BuildConfig.API_URL;
+        String scoreString = "";
+        try {
+            scoreString = getJSONObjectFromURL(baseUrl + "scores", token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        Score[] scores = null;
+        try{
+            scores = mapper.readValue(scoreString, Score[].class);
+            if(scores.length == 0) return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        System.out.println(Arrays.toString(scores));
+        return scores;
     }
 }

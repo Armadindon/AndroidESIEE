@@ -1,11 +1,14 @@
 package com.esiee.openclassroom.model;
 
+import com.esiee.openclassroom.model.deserializer.QuestionDeserializer;
 import com.esiee.openclassroom.model.serializer.QuestionSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
+@JsonDeserialize(using = QuestionDeserializer.class)
 @JsonSerialize(using = QuestionSerializer.class)
 public class Question implements Serializable {
 
@@ -101,6 +104,10 @@ public class Question implements Serializable {
     @JsonIgnore
     public int getId() {
         return id;
+    }
+
+    public void setId(int id)  {
+        this.id =  id;
     }
 
     @Override

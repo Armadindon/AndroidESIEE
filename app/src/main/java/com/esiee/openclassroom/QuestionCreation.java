@@ -23,7 +23,8 @@ import com.esiee.openclassroom.model.Question;
 import com.esiee.openclassroom.model.User;
 
 public class QuestionCreation extends AppCompatActivity {
-
+    public static final String INTENT_TOKEN = "token";
+    public static final String INTENT_USER = "user";
     private final static int ENABLE_FIELDS = 1;
     private TextView mQuestionEditText;
     private EditText mAnswer1EditText;
@@ -157,6 +158,8 @@ public class QuestionCreation extends AppCompatActivity {
 
     private void goToMenuPanel(Context c) {
         Intent menuIntent = new Intent(c, Menu.class);
+        menuIntent.putExtra(INTENT_TOKEN, token);
+        menuIntent.putExtra(INTENT_USER, user);
         startActivityForResult(menuIntent, 0);
     }
 
