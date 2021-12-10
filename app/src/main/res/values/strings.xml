@@ -58,7 +58,7 @@
     <string name="connection_login_input_placeholder">Pseudonyme</string>
     <string name="connection_password_input_placeholder">••••••••••</string>
     <string name="connection_button_signup_placeholder">Se connecter</string>
-    <string name="connection_link_connection_placeholder">Inscrivez-vous !</string>
+    <string name="connection_link_connection_placeholder">Inscription</string>
 
     <string name="menu_button_quiz">Quiz</string>
     <string name="menu_button_leaderboard">Leaderboard</string>

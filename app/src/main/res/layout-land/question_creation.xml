@@ -12,36 +12,26 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="6dp" />
 
     <EditText
         android:id="@+id/question_creation_edittext_question"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="64dp"
+        style="@style/QuestionText"
+        android:layout_height="70dp"
         android:background="@color/purple_500"
-        android:gravity="center"
-        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_creation_button_return"
-        tools:ignore="MissingConstraints"
         tools:text="Question?" />
 
     <EditText
         android:id="@+id/question_creation_edittext_answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +40,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +49,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,15 +58,11 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/AnswerText"
+        android:hint="Answer4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3"
-        android:hint="Answer4" />
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

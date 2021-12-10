@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_textview_question"
-        tools:text="Answer1" />
+        android:text="Answer1" />
 
     <Button
         android:id="@+id/questions_button_answer2"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_answer1"
-        tools:text="Answer2" />
+        android:text="Answer2" />
 
     <Button
         android:id="@+id/questions_button_answer3"
@@ -55,15 +55,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_answer2"
-        tools:text="Answer3" />
+        android:text="Answer3" />
 
     <Button
         android:id="@+id/questions_button_answer4"
         style="@style/QuestionButton"
+        android:radius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_answer3"
-        tools:text="Answer4" />
+        android:text="Answer4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

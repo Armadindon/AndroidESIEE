@@ -16,7 +16,6 @@ import java.util.List;
 public class Leaderboard extends AppCompatActivity {
 
     private List<TextView> ranks;
-    private TextView rank;
     private TextView score;
     private Button mReturn;
 
@@ -25,8 +24,6 @@ public class Leaderboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
-
-        rank = findViewById(R.id.leaderboard_textview_rank);
         score = findViewById(R.id.leaderboard_textview_score);
 
         ranks = new ArrayList<TextView>();
@@ -45,10 +42,7 @@ public class Leaderboard extends AppCompatActivity {
                 "Le-Killeur-1998", "Cronomasturbe", "X-DarKiller-X", "Fan2charlie_uwu_baka",
                 "ProOtaku2010_gamer", "ShatonMls"};
         int index = 0;
-        for (TextView text: ranks) {
-            rank.setText(mockedPseudos[index++]);
-        }
-        rank.setText("551");
+
         score.setText("#1");
 
         mReturn = findViewById(R.id.leaderboard_button_return);

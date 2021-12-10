@@ -21,7 +21,6 @@
         style="@style/TitleText"
         android:layout_marginTop="32dp"
         android:text="@string/leaderboard"
-        android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,23 +30,25 @@
         android:id="@+id/leaderboard_textview_best_score"
         android:layout_width="229dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="136dp"
         android:text="@string/best_score"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leaderboard_textview_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/leaderboard_textview_score"
         android:layout_width="85dp"
         android:layout_height="36dp"
+        android:layout_marginTop="136dp"
         android:text=""
-        android:textSize="18dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/leaderboard_textview_best_score"
-        app:layout_constraintTop_toBottomOf="@+id/leaderboard_textview_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="410dp"

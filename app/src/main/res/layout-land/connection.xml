@@ -17,26 +17,20 @@
 
     <EditText
         android:id="@+id/connection_edittext_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/EditTextConnection"
         android:layout_marginStart="260dp"
-        android:layout_marginTop="24dp"
         android:autofillHints="AUTOFILL_HINT_USERNAME"
-        android:ems="10"
         android:hint="@string/connection_login_input_placeholder"
-        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connection_title"
         tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/connection_edittext_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/EditTextConnection"
         android:layout_marginStart="260dp"
         android:layout_marginTop="32dp"
         android:autofillHints="AUTOFILL_HINT_PASSWORD"
-        android:ems="10"
         android:hint="@string/connection_password_input_placeholder"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +39,13 @@
 
     <Button
         android:id="@+id/connection_button_connection"
-        style="@style/Buttons"
-        android:layout_marginStart="288dp"
-        android:layout_marginTop="12dp"
+        style="@style/BasicButton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="296dp"
+        android:layout_marginTop="36dp"
         android:text="@string/connection_button_signup_placeholder"
+        app:backgroundTint="@color/black_300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connection_edittext_password" />
 
@@ -56,7 +53,7 @@
         android:id="@+id/connection_link_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="312dp"
+        android:textAlignment="center"
         android:layout_marginTop="4dp"
         android:text="@string/connection_link_connection_placeholder"
         app:layout_constraintStart_toStartOf="parent"
