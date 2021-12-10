@@ -171,14 +171,14 @@ public class ApiTools {
         return newUser;
     }
 
-    public static Question createQuestion(Question q){
+    public static Question createQuestion(Question q, String token){
         String baseUrl = BuildConfig.API_URL;
         Question newQuestion = null;
         try {
             ObjectMapper o = new ObjectMapper();
             String questionJson = o.writeValueAsString(q);
             System.out.println(questionJson);
-            String createdQuestion = postJSONObjectToURL(baseUrl + "questions", questionJson);
+            String createdQuestion = postJSONObjectToURL(baseUrl + "questions",token, questionJson);
             //On map la question
             System.out.println(createdQuestion);
             newQuestion = o.readValue(createdQuestion, Question.class);

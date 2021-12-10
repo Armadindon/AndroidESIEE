@@ -73,6 +73,7 @@ public class Connection extends AppCompatActivity {
                     Looper.prepare();
                     if (!token.isEmpty()) {
                         User user = ApiTools.getUserByUsername(token, mLoginEditText.getText().toString());
+                        System.out.println(user);
                         Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.connection_success), Toast.LENGTH_LONG);
                         toast.show();
                         goToNextPanel(v.getContext(), token, user);

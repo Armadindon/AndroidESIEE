@@ -24,7 +24,7 @@ public class ScoreSerializer extends StdSerializer<Score> {
     public void serialize(Score value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
         jgen.writeNumberField("score", value.getScore());
-        jgen.writeStringField("user", URL_USER + value.getUser().getId());
+        jgen.writeStringField("user", URL_USER + value.getUser().getIdForUs());
 
         jgen.writeEndObject();
     }

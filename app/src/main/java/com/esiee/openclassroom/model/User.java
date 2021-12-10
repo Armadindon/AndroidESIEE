@@ -55,9 +55,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @JsonIgnore
-    public int getId() {
+    public int getIdForUs() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

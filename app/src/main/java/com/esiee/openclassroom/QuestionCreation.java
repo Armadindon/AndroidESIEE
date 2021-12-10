@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.esiee.openclassroom.model.Question;
+import com.esiee.openclassroom.model.User;
 
 public class QuestionCreation extends AppCompatActivity {
 
@@ -38,12 +39,18 @@ public class QuestionCreation extends AppCompatActivity {
     private Button mSubmitButton;
 
     private Handler UIHandler;
+    private String token;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_creation);
         createUpdateUiHandler();
+
+        Intent intent = getIntent();
+        user = (User) intent.getExtras().get(Connection.INTENT_USER);
+        token = intent.getExtras().getString(Connection.INTENT_TOKEN);
 
         mQuestionEditText = findViewById(R.id.question_creation_edittext_question);
         mAnswer1EditText = findViewById(R.id.question_creation_edittext_answer1);
@@ -105,10 +112,10 @@ public class QuestionCreation extends AppCompatActivity {
                 q.setAnswer3(mAnswer3EditText.getText().toString());
                 q.setAnswer4(mAnswer4EditText.getText().toString());
                 q.setAnswerIndex(Integer.parseInt( rb.getText().toString() ));
-                q.setCreator(null);
+                q.setCreator(user);
 
                 Thread thread = new Thread(() -> {
-                    Question newQuestion = ApiTools.createQuestion(q);
+                    Question newQuestion = ApiTools.createQuestion(q, token);
 
                     //On envoie un message au handler pour qu'il réactive les champs
                     Message m = new Message();

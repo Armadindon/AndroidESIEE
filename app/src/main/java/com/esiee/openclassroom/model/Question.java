@@ -93,6 +93,7 @@ public class Question implements Serializable {
         return creator;
     }
 
+    @JsonIgnore
     public void setCreator(User creator) {
         this.creator = creator;
     }

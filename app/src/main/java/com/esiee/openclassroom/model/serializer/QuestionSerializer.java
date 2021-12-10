@@ -32,7 +32,7 @@ public class QuestionSerializer extends StdSerializer<Question> {
         jgen.writeStringField("answer3", value.getAnswer3());
         jgen.writeStringField("answer4", value.getAnswer4());
         jgen.writeNumberField("answerIndex", value.getAnswerIndex());
-        jgen.writeStringField("creator", URL_USER+value.getCreator().getId());
+        jgen.writeStringField("creator", URL_USER+value.getCreator().getIdForUs());
 
         jgen.writeEndObject();
     }
