@@ -6,37 +6,6 @@
     <string name="enter_your_name">Merci d\'entrez votre prénom</string>
     <string name="play_button">Jouer !</string>
 
-    <string name="question_1">Qui est le créateur d\'android?</string>
-    <string name="question_1_answer_1" translatable="false">Andy Rubin</string>
-    <string name="question_1_answer_2" translatable="false">Steve Wozniak</string>
-    <string name="question_1_answer_3" translatable="false">Jake Wharton</string>
-    <string name="question_1_answer_4" translatable="false">Paul Smith</string>
-
-
-    <string name="question_2">En quelle année l\'homme à posé le pied sur la lune en premier ?</string>
-    <string name="question_2_answer_1" translatable="false">1958</string>
-    <string name="question_2_answer_2" translatable="false">1962</string>
-    <string name="question_2_answer_3" translatable="false">1967</string>
-    <string name="question_2_answer_4" translatable="false">1969</string>
-
-    <string name="question_3">Quel est le numéro de la maison des simpsons ?</string>
-    <string name="question_3_answer_1" translatable="false">42</string>
-    <string name="question_3_answer_2" translatable="false">101</string>
-    <string name="question_3_answer_3" translatable="false">666</string>
-    <string name="question_3_answer_4" translatable="false">742</string>
-
-    <string name="question_4">Quel est le meilleur fruit ?</string>
-    <string name="question_4_answer_1">La banane</string>
-    <string name="question_4_answer_2">Le tacos merguez</string>
-    <string name="question_4_answer_3">La Clémentine</string>
-    <string name="question_4_answer_4">Le durian</string>
-
-    <string name="question_5">Quel est la réponse à la vie ?</string>
-    <string name="question_5_answer_1">Finir le tp d\'android</string>
-    <string name="question_5_answer_2" translatable="false">42</string>
-    <string name="question_5_answer_3">Ne pas crever</string>
-    <string name="question_5_answer_4">Jouer à Gorilla tag en VR</string>
-
     <string name="correct_answer">Bien joué !</string>
     <string name="wrong_answer">Raté !</string>
     <string name="finish_alert_title">Bien joué !</string>
@@ -75,5 +44,10 @@
     <string name="question_creation_edittext_answer3">Réponse 3</string>
     <string name="question_creation_edittext_answer4">Réponse 4</string>
     <string name="question_creation_button_submit">Valider</string>
+
+    <string name="question_creation_toast_created">Question créée</string>
+    <string name="question_creation_toast_notcreated">Impossible de créer la question</string>
+    <string name="question_creation_toast_missingradio">Il vous manque l\'index de la bonne réponse</string>
+    <string name="question_creation_toast_missinginput">Il vous manque la question ou une réponse</string>
 
 </resources>

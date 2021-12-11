@@ -33,7 +33,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_creation_button_return"
         tools:ignore="MissingConstraints"
-        tools:text="@string/question_creation_edittext_question" />
+        android:hint="@string/question_creation_edittext_question" />
+
+    <EditText
+        android:id="@+id/question_creation_edittext_answer1"
+        style="@style/EditTextQstCreation"
+        android:layout_marginTop="32dp"
+        android:hint="@string/question_creation_edittext_answer1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_question" />
+
+    <EditText
+        android:id="@+id/question_creation_edittext_answer2"
+        style="@style/EditTextQstCreation"
+        android:layout_marginTop="32dp"
+        android:hint="@string/question_creation_edittext_answer2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer1" />
+
+    <EditText
+        android:id="@+id/question_creation_edittext_answer3"
+        style="@style/EditTextQstCreation"
+        android:layout_marginTop="32dp"
+        android:hint="@string/question_creation_edittext_answer3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer2" />
+
+    <EditText
+        android:id="@+id/question_creation_edittext_answer4"
+        style="@style/EditTextQstCreation"
+        android:layout_marginTop="32dp"
+        android:hint="@string/question_creation_edittext_answer4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3" />
 
     <RadioGroup
         android:id="@+id/question_creation_radiogroup"
@@ -47,7 +87,7 @@
         <RadioButton
             android:id="@+id/question_creation_radio_answer1"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="56dp"
             android:checked="false"
             android:text="0"
             android:textColor="#FFFFFF"
@@ -56,8 +96,8 @@
         <RadioButton
             android:id="@+id/question_creation_radio_answer2"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="28dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
             android:checked="false"
             android:text="1"
             android:textColor="#FFFFFF"
@@ -66,8 +106,8 @@
         <RadioButton
             android:id="@+id/question_creation_radio_answer3"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
             android:checked="false"
             android:text="2"
             android:textColor="#FFFFFF"
@@ -76,8 +116,8 @@
         <RadioButton
             android:id="@+id/question_creation_radio_answer4"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="26dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
             android:checked="false"
             android:text="3"
             android:textColor="#FFFFFF"
@@ -88,49 +128,9 @@
         android:id="@+id/question_creation_button_submit"
         style="@style/BasicButton"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:text="@string/question_creation_button_submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer4" />
-
-    <EditText
-        android:id="@+id/question_creation_edittext_answer2"
-        style="@style/EditTextQstCreation"
-        android:layout_marginTop="32dp"
-        android:hint="@string/question_creation_edittext_answer2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer1" />
-
-    <EditText
-        android:id="@+id/question_creation_edittext_answer4"
-        style="@style/EditTextQstCreation"
-        android:layout_marginTop="32dp"
-        android:hint="@string/question_creation_edittext_answer4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3" />
-
-    <EditText
-        android:id="@+id/question_creation_edittext_answer3"
-        style="@style/EditTextQstCreation"
-        android:layout_marginTop="28dp"
-        android:hint="@string/question_creation_edittext_answer3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer2" />
-
-    <EditText
-        android:id="@+id/question_creation_edittext_answer1"
-        style="@style/EditTextQstCreation"
-        android:layout_marginTop="28dp"
-        android:hint="@string/question_creation_edittext_answer1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_question" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

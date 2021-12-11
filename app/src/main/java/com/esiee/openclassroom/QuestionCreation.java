@@ -94,6 +94,14 @@ public class QuestionCreation extends AppCompatActivity {
                         textView.setError(getString(R.string.field_required_error));
                     }
                 }
+                if (mAnswerRadioGroup.getCheckedRadioButtonId() == -1)
+                {
+                    fullInformations = false;
+                    mAnswer1RadioButton.setError(getString(R.string.question_creation_toast_missingradio));
+                    mAnswer2RadioButton.setError(getString(R.string.question_creation_toast_missingradio));
+                    mAnswer3RadioButton.setError(getString(R.string.question_creation_toast_missingradio));
+                    mAnswer4RadioButton.setError(getString(R.string.question_creation_toast_missingradio));
+                }
                 if (!fullInformations) return;
 
                 //On bloque les champs le temps d'éxecution
@@ -123,16 +131,15 @@ public class QuestionCreation extends AppCompatActivity {
                     //On agit en fonction de la réponse
                     Looper.prepare();
                     if (newQuestion != null) {
-                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created), Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.question_creation_toast_created), Toast.LENGTH_LONG);
                         toast.show();
                         goToMenuPanel(v.getContext());
                     } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created_error), Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.question_creation_toast_notcreated), Toast.LENGTH_LONG);
                         toast.show();
                     }
                 });
                 thread.start();
-                //System.out.println(mQuestionEditText.getText() + "\n" + mAnswer1EditText.getText() + "\n" + mAnswer2EditText.getText() + "\n" + mAnswer3EditText.getText() + "\n" + mAnswer4EditText.getText());
             }
         });
     }
@@ -170,10 +177,10 @@ public class QuestionCreation extends AppCompatActivity {
         try {
             ObjectMapper o = new ObjectMapper();
             String questionJson = o.writeValueAsString(q);
-            System.out.println(questionJson);
+            //System.out.println(questionJson);
             String createdQuestion = ApiTools.postJSONObjectToURL(baseUrl + "questions",token, questionJson);
             //On map la question
-            System.out.println(createdQuestion);
+            //System.out.println(createdQuestion);
             newQuestion = o.readValue(createdQuestion, Question.class);
 
         } catch (IOException e) {

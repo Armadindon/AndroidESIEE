@@ -91,7 +91,7 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             t.start();
 
         }
-        System.out.println(mQuestionBank);
+        //System.out.println(mQuestionBank);
         freezeScreen = false;
 
         mReturn.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +102,8 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
                         .setMessage("Voulez-vous vraiment retourner à l'accueil? Toute progression sera perdue.")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent signUpIntent = new Intent(v.getContext(), SignUp.class);
-                                startActivityForResult(signUpIntent, 0);
+                                Intent menuIntent = new Intent(v.getContext(), Menu.class);
+                                startActivityForResult(menuIntent, 0);
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
@@ -127,7 +127,6 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
     private void displayQuestion(Question question) {
         // Set the text for the question text view and the four buttons
         mCurrentQuestion = question;
-        System.out.println(question);
         mQuestionTitle.setText(question.getContent());
         mAnswer1.setText(question.getAnswer1());
         mAnswer2.setText(question.getAnswer2());
@@ -241,11 +240,11 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
         try {
             ObjectMapper o = new ObjectMapper();
             String scoreJson = o.writeValueAsString(s);
-            System.out.println(scoreJson);
+            //System.out.println(scoreJson);
             String createdScore = ApiTools.postJSONObjectToURL(baseUrl + "scores",token, scoreJson);
 
             //On map la question
-            System.out.println(createdScore);
+            //System.out.println(createdScore);
             newScore = o.readValue(createdScore, Score.class);
 
         } catch (IOException e) {

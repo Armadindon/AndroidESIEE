@@ -4,23 +4,11 @@
     <string name="welcome_screen">Welcome to TopQuiz. What is your name ?</string>
     <string name="enter_your_name">Please type your name.</string>
     <string name="play_button">Play !</string>
-    <string name="question_1">Who is the creator of Android ?</string>
-    <string name="question_3">What is the house number of the simpsons ?</string>
-    <string name="question_2">In which year the first man landed on the moon ?</string>
     <string name="correct_answer">Well done !</string>
-    <string name="wrong_answer">Wrong answer :c</string>
+    <string name="wrong_answer">Wrong answer</string>
     <string name="finish_alert_title">Well done !</string>
     <string name="finish_final_score">"Your final score is : "</string>
     <string name="finish_final_button">OK</string>
-    <string name="question_4">What is the best fruit ?</string>
-    <string name="question_4_answer_1">The banana</string>
-    <string name="question_4_answer_2">The infamous Tacos Merguez</string>
-    <string name="question_4_answer_3">The clementine</string>
-    <string name="question_4_answer_4">The durian</string>
-    <string name="question_5">What is the purpose of life ?</string>
-    <string name="question_5_answer_3">To not die</string>
-    <string name="question_5_answer_4">Play Gorilla Tag with a VR Headset</string>
-    <string name="question_5_answer_1" translatable="false">Finish the android TP</string>
     <string name="welcome_screen_previous_play">Welcome Back %s !\n Your last score was %d; Wil you do better this time ?</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="best_score">Your best score :</string>
@@ -47,4 +35,16 @@
     <string name="user_created_error">The user can\'t be created, the username must already be set</string>
     <string name="connection_error">The connection failed</string>
     <string name="connection_success">The connection succeed</string>
+
+    <string name="question_creation_edittext_question">Question</string>
+    <string name="question_creation_edittext_answer1">Answer 1</string>
+    <string name="question_creation_edittext_answer2">Answer 2</string>
+    <string name="question_creation_edittext_answer3">Answer 3</string>
+    <string name="question_creation_edittext_answer4">Answer 4</string>
+    <string name="question_creation_button_submit">Submit</string>
+
+    <string name="question_creation_toast_created">Question submitted</string>
+    <string name="question_creation_toast_notcreated">Impossible to submit the question</string>
+    <string name="question_creation_toast_missingradio">Index answer missing</string>
+    <string name="question_creation_toast_missinginput">Question or answer missing</string>
 </resources>
