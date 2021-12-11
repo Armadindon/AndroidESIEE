@@ -10,45 +10,41 @@
     <TextView
         android:id="@+id/menu_title"
         style="@style/TitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/app_title"
-        android:layout_marginTop="28dp"
         android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menu_button_quiz"
-        style="@style/BasicButton"
-        android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
-        android:padding="10dp"
+        style="@style/ButtonsHorizontal"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_title"
         android:text="@string/menu_button_quiz" />
 
     <Button
         android:id="@+id/menu_button_leaderboard"
-        style="@style/BasicButton"
-        android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
+        style="@style/ButtonsHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button_quiz"
         android:text="@string/menu_button_leaderboard" />
 
     <Button
         android:id="@+id/menu_button_questioncreation"
-        style="@style/BasicButton"
-        android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
+        style="@style/ButtonsHorizontal"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button_leaderboard"
         android:text="@string/menu_button_questioncreation" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

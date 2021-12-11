@@ -13,7 +13,7 @@
             android:name=".Leaderboard"
             android:exported="false" />
         <activity
-            android:name=".Menu"
+            android:name=".Connection"
             android:exported="false" />
         <activity
             android:name=".SignUp"
@@ -35,7 +35,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Connection"
+            android:name=".Questions"
             android:exported="false" />
 
         <meta-data

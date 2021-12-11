@@ -15,12 +15,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="-2dp" />
+        tools:layout_editor_absoluteY="2dp" />
 
     <TextView
         android:id="@+id/questions_textview_question"
         style="@style/QuestionText"
-        android:layout_height="150dp"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,16 +30,17 @@
 
     <Button
         android:id="@+id/questions_button_answer1"
-        style="@style/QuestionButton"
+        style="@style/QuestionButtonHorizontal"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_textview_question"
         android:text="Answer1" />
 
     <Button
         android:id="@+id/questions_button_answer2"
-        style="@style/QuestionButton"
+        style="@style/QuestionButtonHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +49,7 @@
 
     <Button
         android:id="@+id/questions_button_answer3"
-        style="@style/QuestionButton"
+        style="@style/QuestionButtonHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +58,9 @@
 
     <Button
         android:id="@+id/questions_button_answer4"
-        style="@style/QuestionButton"
+        style="@style/QuestionButtonHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_answer3"
         android:text="Answer4" />

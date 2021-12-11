@@ -18,24 +18,20 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_question"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="64dp"
+        style="@style/QuestionText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:background="@color/blue"
-        android:gravity="center"
-        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_creation_button_return"
-        tools:ignore="MissingConstraints"
         tools:text="Question?" />
 
     <EditText
         android:id="@+id/question_creation_edittext_answer1"
-        style="@style/EditTextQstCreation"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +40,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer2"
-        style="@style/EditTextQstCreation"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +49,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer3"
-        style="@style/EditTextQstCreation"
+        style="@style/AnswerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +58,11 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer4"
-        style="@style/EditTextQstCreation"
+        style="@style/AnswerText"
+        android:hint="Answer4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3"
-        android:hint="Answer4" />
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
