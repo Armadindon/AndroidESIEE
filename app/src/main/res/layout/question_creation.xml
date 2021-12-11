@@ -27,6 +27,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:checked="false"
-            android:text="1"
+            android:text="0"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
 
@@ -58,7 +59,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="28dp"
             android:checked="false"
-            android:text="2"
+            android:text="1"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
 
@@ -68,7 +69,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="25dp"
             android:checked="false"
-            android:text="3"
+            android:text="2"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
 
@@ -78,7 +79,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="26dp"
             android:checked="false"
-            android:text="4"
+            android:text="3"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
     </RadioGroup>
