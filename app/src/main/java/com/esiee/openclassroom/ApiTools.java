@@ -9,9 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
@@ -65,9 +68,8 @@ public class ApiTools {
         urlConnection.setConnectTimeout(15000 /* milliseconds */ );
         urlConnection.setUseCaches(false);
         urlConnection.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream (
-                urlConnection.getOutputStream());
-        wr.writeBytes(body);
+        Writer wr = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
+        wr.write(body);
         wr.close();
         urlConnection.connect();
 
