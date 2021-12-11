@@ -63,5 +63,17 @@
     <string name="menu_button_quiz">Quiz</string>
     <string name="menu_button_leaderboard">Leaderboard</string>
     <string name="menu_button_questioncreation">Créer une question</string>
+    <string name="field_required_error">Ce champ est obligatoire</string>
+    <string name="user_created">L\'utilisateur a bien été créé</string>
+    <string name="user_created_error">L\'utilisateur n\'a pa pu être créé, le nom d\'utilisateur doit déjà être pris</string>
+    <string name="connection_success">La connexion a réussi</string>
+    <string name="connection_error">Nous n\'avons pas pu vous authentifier</string>
+
+    <string name="question_creation_edittext_question">Question</string>
+    <string name="question_creation_edittext_answer1">Réponse 1</string>
+    <string name="question_creation_edittext_answer2">Réponse 2</string>
+    <string name="question_creation_edittext_answer3">Réponse 3</string>
+    <string name="question_creation_edittext_answer4">Réponse 4</string>
+    <string name="question_creation_button_submit">Valider</string>
 
 </resources>

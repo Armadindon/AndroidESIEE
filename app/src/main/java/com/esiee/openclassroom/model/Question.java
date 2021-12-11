@@ -1,13 +1,22 @@
 package com.esiee.openclassroom.model;
 
-import java.io.Serializable;
-import java.util.List;
+import com.esiee.openclassroom.model.deserializer.QuestionDeserializer;
+import com.esiee.openclassroom.model.serializer.QuestionSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
+
+@JsonDeserialize(using = QuestionDeserializer.class)
+@JsonSerialize(using = QuestionSerializer.class)
 public class Question implements Serializable {
 
+    private int id;
     private String content;
     private String answer1;
     private String answer2;
+
     private String answer3;
     private String answer4;
     private int answerIndex;
@@ -87,7 +96,31 @@ public class Question implements Serializable {
         return creator;
     }
 
+    @JsonIgnore
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    @JsonIgnore
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id)  {
+        this.id =  id;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", answer1='" + answer1 + '\'' +
+                ", answer2='" + answer2 + '\'' +
+                ", answer3='" + answer3 + '\'' +
+                ", answer4='" + answer4 + '\'' +
+                ", answerIndex=" + answerIndex +
+                ", creator=" + creator +
+                '}';
     }
 }

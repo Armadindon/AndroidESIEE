@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.esiee.openclassroom" >
+    package="com.esiee.openclassroom">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,10 @@
             android:name=".Leaderboard"
             android:exported="false" />
         <activity
-            android:name=".Connection"
+            android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".Connection"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +33,7 @@
             android:name=".QuestionCreation"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Questions"
+            android:name=".SignUp"
             android:exported="false" />
 
         <meta-data

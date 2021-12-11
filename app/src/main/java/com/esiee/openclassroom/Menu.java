@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.esiee.openclassroom.model.User;
+
 public class Menu extends AppCompatActivity {
 
     private Button mQuizButton;
@@ -22,13 +24,13 @@ public class Menu extends AppCompatActivity {
         mLeaderboardButton = findViewById(R.id.menu_button_leaderboard);
         mQuestionCreationButton = findViewById(R.id.menu_button_questioncreation);
 
-        /*mQuizButton.setOnClickListener(new View.OnClickListener() {
+        mQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent connectionIntent = new Intent(v.getContext(), Connection.class);
-                startActivityForResult(connectionIntent, 0);
+                Intent questionIntent = new Intent(v.getContext(), Questions.class);
+                startActivityForResult(questionIntent, 0);
             }
-        });*/
+        });
 
         mLeaderboardButton.setOnClickListener(new View.OnClickListener() {
             @Override

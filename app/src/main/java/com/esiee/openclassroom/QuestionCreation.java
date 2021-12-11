@@ -3,36 +3,67 @@ package com.esiee.openclassroom;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.esiee.openclassroom.model.Question;
+import com.esiee.openclassroom.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class QuestionCreation extends AppCompatActivity {
+    private final static int ENABLE_FIELDS = 1;
+    private TextView mQuestionEditText;
+    private EditText mAnswer1EditText;
+    private EditText mAnswer2EditText;
+    private EditText mAnswer3EditText;
+    private EditText mAnswer4EditText;
+    private RadioGroup mAnswerRadioGroup;
+    private RadioButton mAnswer1RadioButton;
+    private RadioButton mAnswer2RadioButton;
+    private RadioButton mAnswer3RadioButton;
+    private RadioButton mAnswer4RadioButton;
+    private Button mReturnButton;
+    private Button mSubmitButton;
 
-    private TextView mQuestionTitle;
-    private EditText mAnswer1;
-    private EditText mAnswer2;
-    private EditText mAnswer3;
-    private EditText mAnswer4;
-    private Button mReturn;
+    private Handler UIHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_creation);
+        createUpdateUiHandler();
 
-        mQuestionTitle = findViewById(R.id.question_creation_edittext_question);
-        mAnswer1 = findViewById(R.id.question_creation_edittext_answer1);
-        mAnswer2 = findViewById(R.id.question_creation_edittext_answer2);
-        mAnswer3 = findViewById(R.id.question_creation_edittext_answer3);
-        mAnswer4 = findViewById(R.id.question_creation_edittext_answer4);
-        mReturn = findViewById(R.id.question_creation_button_return);
+        mQuestionEditText = findViewById(R.id.question_creation_edittext_question);
+        mAnswer1EditText = findViewById(R.id.question_creation_edittext_answer1);
+        mAnswer2EditText = findViewById(R.id.question_creation_edittext_answer2);
+        mAnswer3EditText = findViewById(R.id.question_creation_edittext_answer3);
+        mAnswer4EditText = findViewById(R.id.question_creation_edittext_answer4);
+        mAnswerRadioGroup = findViewById(R.id.question_creation_radiogroup);
+        mAnswer1RadioButton = findViewById(R.id.question_creation_radio_answer1);
+        mAnswer2RadioButton = findViewById(R.id.question_creation_radio_answer2);
+        mAnswer3RadioButton = findViewById(R.id.question_creation_radio_answer3);
+        mAnswer4RadioButton = findViewById(R.id.question_creation_radio_answer4);
+        mReturnButton = findViewById(R.id.question_creation_button_return);
+        mSubmitButton = findViewById(R.id.question_creation_button_submit);
 
-        mReturn.setOnClickListener(new View.OnClickListener() {
+        mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(QuestionCreation.this)
@@ -49,5 +80,107 @@ public class QuestionCreation extends AppCompatActivity {
                         .show();
             }
         });
+
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //On vérifie que toutes les données sont renseignées
+                boolean fullInformations = true;
+                TextView[] fieldsToCheck = {mQuestionEditText, mAnswer1EditText, mAnswer2EditText, mAnswer3EditText, mAnswer4EditText};
+                for (TextView textView : fieldsToCheck) {
+                    if (TextUtils.isEmpty(textView.getText())) {
+                        fullInformations = false;
+                        textView.setError(getString(R.string.field_required_error));
+                    }
+                }
+                if (!fullInformations) return;
+
+                //On bloque les champs le temps d'éxecution
+                switchEnabledFields(false);
+
+                int selectedRadio = mAnswerRadioGroup.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton) findViewById(selectedRadio);
+
+                //On crée le user avec les données
+                Question q = new Question();
+                q.setContent(mQuestionEditText.getText().toString());
+                q.setAnswer1(mAnswer1EditText.getText().toString());
+                q.setAnswer2(mAnswer2EditText.getText().toString());
+                q.setAnswer3(mAnswer3EditText.getText().toString());
+                q.setAnswer4(mAnswer4EditText.getText().toString());
+                q.setAnswerIndex(Integer.parseInt( rb.getText().toString() ));
+                q.setCreator(DataManager.getInstance().getUser());
+
+                Thread thread = new Thread(() -> {
+                    Question newQuestion = createQuestion(q, DataManager.getInstance().getToken());
+
+                    //On envoie un message au handler pour qu'il réactive les champs
+                    Message m = new Message();
+                    m.what = ENABLE_FIELDS;
+                    UIHandler.sendMessage(m);
+
+                    //On agit en fonction de la réponse
+                    Looper.prepare();
+                    if (newQuestion != null) {
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created), Toast.LENGTH_LONG);
+                        toast.show();
+                        goToMenuPanel(v.getContext());
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.user_created_error), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+                thread.start();
+                //System.out.println(mQuestionEditText.getText() + "\n" + mAnswer1EditText.getText() + "\n" + mAnswer2EditText.getText() + "\n" + mAnswer3EditText.getText() + "\n" + mAnswer4EditText.getText());
+            }
+        });
+    }
+
+    private void createUpdateUiHandler() {
+        //Permet de creer un handler
+        if (UIHandler == null) {
+            UIHandler = new Handler(new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    // Means the message is sent from child thread.
+                    if (msg.what == ENABLE_FIELDS) {
+                        switchEnabledFields(true);
+                    }
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void goToMenuPanel(Context c) {
+        Intent menuIntent = new Intent(c, Menu.class);
+        startActivityForResult(menuIntent, 0);
+    }
+
+    private void switchEnabledFields(boolean enabled) {
+        TextView[] fieldsToCheck = {mQuestionEditText, mAnswer1EditText, mAnswer2EditText, mAnswer3EditText, mAnswer4EditText};
+        for (TextView textView : fieldsToCheck) textView.setEnabled(enabled);
+        mSubmitButton.setEnabled(enabled);
+    }
+
+    public static Question createQuestion(Question q, String token){
+        String baseUrl = BuildConfig.API_URL;
+        Question newQuestion = null;
+        try {
+            ObjectMapper o = new ObjectMapper();
+            String questionJson = o.writeValueAsString(q);
+            System.out.println(questionJson);
+            String createdQuestion = ApiTools.postJSONObjectToURL(baseUrl + "questions",token, questionJson);
+            //On map la question
+            System.out.println(createdQuestion);
+            newQuestion = o.readValue(createdQuestion, Question.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newQuestion;
     }
 }
