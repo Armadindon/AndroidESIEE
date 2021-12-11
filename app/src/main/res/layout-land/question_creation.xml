@@ -20,7 +20,7 @@
         android:id="@+id/question_creation_edittext_question"
         style="@style/QuestionText"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@color/blue"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,5 +64,65 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer3" />
+
+    <Button
+        android:id="@+id/question_creation_button_submit"
+        style="@style/BasicButton"
+        android:height="25dp"
+        android:textSize="14dp"
+        android:text="@string/question_creation_button_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_creation_edittext_answer4" />
+
+    <RadioGroup
+        android:id="@+id/question_creation_radiogroup"
+        android:layout_width="50dp"
+        android:layout_height="204dp"
+        android:layout_marginEnd="256dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/question_creation_edittext_answer1"
+        app:layout_constraintTop_toTopOf="@id/question_creation_edittext_answer1">
+
+        <RadioButton
+            android:id="@+id/question_creation_radio_answer1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:checked="false"
+            android:text="1"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
+
+        <RadioButton
+            android:id="@+id/question_creation_radio_answer2"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="2"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
+
+        <RadioButton
+            android:id="@+id/question_creation_radio_answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="3"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
+
+        <RadioButton
+            android:id="@+id/question_creation_radio_answer4"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="4"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/question_creation_radiogroup" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
