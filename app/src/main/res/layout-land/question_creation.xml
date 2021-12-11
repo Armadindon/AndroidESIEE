@@ -21,7 +21,7 @@
         style="@style/QuestionText"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/purple_500"
+        android:background="@color/blue"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

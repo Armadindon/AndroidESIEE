@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_return"
         tools:ignore="MissingConstraints"
-        tools:text="Question?" />
+        android:text="Question?" />
 
     <Button
         android:id="@+id/questions_button_answer1"
