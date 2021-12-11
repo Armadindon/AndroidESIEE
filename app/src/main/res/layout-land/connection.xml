@@ -18,7 +18,7 @@
     <EditText
         android:id="@+id/connection_edittext_login"
         style="@style/EditTextConnection"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="255dp"
         android:autofillHints="AUTOFILL_HINT_USERNAME"
         android:hint="@string/connection_login_input_placeholder"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/connection_edittext_password"
         style="@style/EditTextConnection"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="255dp"
         android:layout_marginTop="32dp"
         android:autofillHints="AUTOFILL_HINT_PASSWORD"
         android:hint="@string/connection_password_input_placeholder"
@@ -42,7 +42,7 @@
         style="@style/BasicButton"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginStart="296dp"
+        android:layout_marginStart="293dp"
         android:layout_marginTop="36dp"
         android:text="@string/connection_button_signup_placeholder"
         app:backgroundTint="@color/black_300"

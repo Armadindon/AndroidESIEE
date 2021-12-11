@@ -10,8 +10,7 @@
 
     <Button
         android:id="@+id/questions_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        style="@style/ButtonReturn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +20,6 @@
     <TextView
         android:id="@+id/questions_textview_question"
         style="@style/QuestionText"
-        android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

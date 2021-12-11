@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/signup_edittext_login"
-        style="@style/EditTextSignUp"
+        style="@style/EditTextSignUpHorizontal"
         android:layout_marginTop="0dp"
         android:autofillHints="AUTOFILL_HINT_USERNAME"
         android:hint="@string/signup_login_input_placeholder"
@@ -27,17 +27,16 @@
 
     <EditText
         android:id="@+id/signup_edittext_firstname"
-        style="@style/EditTextSignUp"
+        style="@style/EditTextSignUpHorizontal"
         android:autofillHints="AUTOFILL_HINT_GIVEN"
         android:hint="@string/signup_firstname_input_placeholder"
-        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_edittext_login"
         tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/signup_edittext_lastname"
-        style="@style/EditTextSignUp"
+        style="@style/EditTextSignUpHorizontal"
         android:autofillHints="AUTOFILL_HINT_FAMILY"
         android:hint="@string/signup_lastname_input_placeholder"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +45,7 @@
 
     <EditText
         android:id="@+id/signup_edittext_password"
-        style="@style/EditTextSignUp"
+        style="@style/EditTextSignUpHorizontal"
         android:autofillHints="AUTOFILL_HINT_PASSWORD"
         android:hint="@string/signup_password_input_placeholder"
         android:inputType="textPassword"
@@ -59,7 +58,7 @@
         android:layout_width="match_parent"
         android:textAlignment="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/signup_link_connection_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_button_signup" />
@@ -70,9 +69,8 @@
         android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:text="@string/signup_button_signup_placeholder"
-        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_edittext_password" />
 

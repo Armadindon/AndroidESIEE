@@ -9,10 +9,9 @@
 
     <Button
         android:id="@+id/question_creation_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        style="@style/ButtonReturn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="6dp" />
@@ -26,8 +25,7 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +35,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/EditTextQstCreation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +44,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/EditTextQstCreation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +53,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/EditTextQstCreation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,11 +62,7 @@
 
     <EditText
         android:id="@+id/question_creation_edittext_answer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="16dp"
-        android:textSize="20sp"
+        style="@style/EditTextQstCreation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"

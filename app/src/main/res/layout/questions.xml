@@ -10,18 +10,16 @@
 
     <Button
         android:id="@+id/questions_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        style="@style/ButtonReturn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="2dp" />
+        tools:layout_editor_absoluteY="-2dp" />
 
     <TextView
         android:id="@+id/questions_textview_question"
         style="@style/QuestionText"
-        android:layout_width="match_parent"
         android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -60,9 +58,8 @@
     <Button
         android:id="@+id/questions_button_answer4"
         style="@style/QuestionButton"
-        android:radius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questions_button_answer3"
         android:text="Answer4" />

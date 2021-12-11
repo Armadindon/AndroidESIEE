@@ -8,13 +8,12 @@
 
     <Button
         android:id="@+id/leaderboard_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        style="@style/ButtonReturn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="-2dp" />
 
     <TextView
         android:id="@+id/leaderboard_textview_title"
@@ -31,10 +30,10 @@
         android:id="@+id/leaderboard_textview_best_score"
         android:layout_width="229dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:fontFamily="@font/roboto"
         android:text="@string/best_score"
-        android:textSize="18dp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/leaderboard_textview_title" />
 
@@ -43,7 +42,7 @@
         android:layout_width="85dp"
         android:layout_height="36dp"
         android:text=""
-        android:textSize="18dp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toEndOf="@+id/leaderboard_textview_best_score"

@@ -18,7 +18,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:background">@drawable/button</item>
@@ -44,7 +44,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:padding">16dp</item>
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:background">@drawable/button</item>
@@ -64,8 +64,7 @@
     <style
         name="QuestionText"
         parent="@style/TextAppearance.AppCompat.Body1">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="fontFamily">@font/quicksand</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20dp</item>
@@ -76,29 +75,34 @@
     <style name="AnswerText"
         parent="@style/TextAppearance.AppCompat.Medium">
         <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:padding">16dp</item>
     </style>
 
-    <style name="EditTextSignUp"
+    <style name="EditTextSignUpHorizontal"
         parent="@style/TextAppearance.AppCompat.Body1">
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">260dp</item>
-        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">255dp</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">text</item>
     </style>
 
-    <style name="BasicEditText"
+    <style name="EditTextSignUp"
         parent="@style/TextAppearance.AppCompat.Body1">
         <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ems">10</item>
+        <item name="android:layout_marginStart">90dp</item>
+        <item name="android:layout_marginTop">40dp</item>
         <item name="android:inputType">text</item>
     </style>
 
@@ -107,12 +111,31 @@
         <item name="android:textSize">18dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">text</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:padding">15dp</item>
         <item name="android:background">@drawable/gradient</item>
         <item name="android:layout_marginStart">100dp</item>
+    </style>
+
+    <style name="EditTextQstCreation"
+        parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style
+        name="ButtonReturn"
+        parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:background">@drawable/ic_action_name</item>
     </style>
 
 

@@ -8,13 +8,14 @@
 
     <Button
         android:id="@+id/leaderboard_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:background="@drawable/ic_action_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="1dp" />
 
     <TextView
         android:id="@+id/leaderboard_textview_title"
@@ -22,7 +23,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/leaderboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,8 +52,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="510dp"
+        android:layout_width="696dp"
+        android:layout_height="221dp"
         android:layout_marginBottom="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,8 +111,7 @@
         <TextView
             android:id="@+id/leaderboard_textview_rank5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-/>
+            android:layout_height="wrap_content" />
 
         <View
             android:id="@+id/leaderboard_divider5"

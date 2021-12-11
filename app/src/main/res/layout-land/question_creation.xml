@@ -9,10 +9,9 @@
 
     <Button
         android:id="@+id/question_creation_button_return"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        style="@style/ButtonReturn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="6dp" />
@@ -20,6 +19,7 @@
     <EditText
         android:id="@+id/question_creation_edittext_question"
         style="@style/QuestionText"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/purple_500"
         android:textColor="@color/white"
