@@ -21,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SignUp extends AppCompatActivity {
 
@@ -137,10 +139,10 @@ public class SignUp extends AppCompatActivity {
         try {
             ObjectMapper o = new ObjectMapper();
             String userJson = o.writeValueAsString(u);
-            System.out.println(userJson);
+            Logger.getAnonymousLogger().log(Level.INFO, userJson);
             String createdUser = ApiTools.postJSONObjectToURL(baseUrl + "users", userJson);
             //On map l'user
-            System.out.println(createdUser);
+            Logger.getAnonymousLogger().log(Level.INFO, createdUser);
             newUser = o.readValue(createdUser, User.class);
 
         } catch (IOException e) {

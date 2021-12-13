@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Leaderboard extends AppCompatActivity {
 
@@ -97,7 +99,7 @@ public class Leaderboard extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
-        System.out.println(Arrays.toString(scores));
+        Logger.getAnonymousLogger().log(Level.INFO, Arrays.toString(scores));
         return scores;
         
     }

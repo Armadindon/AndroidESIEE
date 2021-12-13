@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ScoreDeserializer extends StdDeserializer<Score> {
 
@@ -31,11 +33,11 @@ public class ScoreDeserializer extends StdDeserializer<Score> {
     public Score deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
         String baseUrl = BuildConfig.API_URL;
         JsonNode node = p.getCodec().readTree(p);
-        System.out.println("Deserialization");
+        Logger.getAnonymousLogger().log(Level.INFO, "Deserialization");
         int score = node.get("score").asInt();
-        System.out.println("Deserialization score");
+        Logger.getAnonymousLogger().log(Level.INFO, "Deserialization score");
         String userURI = node.get("byUser").asText();
-        System.out.println("Deserialization user");
+        Logger.getAnonymousLogger().log(Level.INFO, "Deserialization user");
         User user = null;
         try {
             String userJSON = ApiTools.getJSONObjectFromURL(baseUrl+userURI.substring(1), DataManager.getInstance().getToken());

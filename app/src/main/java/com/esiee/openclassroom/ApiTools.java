@@ -18,6 +18,8 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -53,7 +55,7 @@ public class ApiTools {
 
     // Make a POST Request
     public static String postJSONObjectToURL(String urlString, String token, String body) throws IOException, JSONException {
-        System.out.println(body);
+        Logger.getAnonymousLogger().log(Level.INFO, body);
         HttpsURLConnection urlConnection = null;
         URL url = new URL(urlString);
         urlConnection = (HttpsURLConnection) url.openConnection();
@@ -86,7 +88,7 @@ public class ApiTools {
             }
             br.close();
             jsonString = sb.toString();
-            System.out.println(jsonString);
+            Logger.getAnonymousLogger().log(Level.INFO, jsonString);
         }
 
         return jsonString;

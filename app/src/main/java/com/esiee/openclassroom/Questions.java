@@ -91,7 +91,6 @@ public class Questions extends AppCompatActivity implements View.OnClickListener
             t.start();
 
         }
-        //System.out.println(mQuestionBank);
         freezeScreen = false;
 
         mReturn.setOnClickListener(new View.OnClickListener() {
